@@ -54,7 +54,6 @@
     <Compile Include="src\backend\GADirectedSimulation.cs" />
     <Compile Include="src\backend\GASimulation.cs" />
     <Compile Include="src\backend\GAUndirectedSimulation.cs" />
-    <Compile Include="src\backend\NodeGraph.cs" />
     <Compile Include="src\backend\PhysicsDemo.cs" />
     <Compile Include="src\backend\Program.cs" />
     <Compile Include="src\backend\UndirectedNode.cs" />
