@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="js/socket.io.min.js"></script>
+        <script type="text/javascript" src="js/three.min.js"></script>
+        <script type="text/javascript" src="js/request_animation_frame.js"></script>
+        <script type="text/javascript" src="js/stats.js"></script>
+        <script type="text/javascript" src="js/dat.gui.min.js"></script>
+        <style type="text/css">
+            html, body
+            {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+
+        <title>Project SEVE</title>
+    </head>
+    <body>
+        <script type="text/javascript">
+            /* RENDERING STUFF */
+            var WIDTH = window.innerWidth,
+                HEIGHT = window.innerHeight;
+
+            var renderer = new THREE.WebGLRenderer(),
+                scene = new THREE.Scene(),
+                camera = new THREE.PerspectiveCamera(45, WIDTH / HEIGHT, 1, 10000),
+                light = new THREE.SpotLight(),
+                stats = new Stats();
+
+            var zoom = 1,
+                radius = 1,
+                segements = 10,
+                rings = 10;
+
+            var gui = new dat.GUI();
+
+            var points = [],
+                objects = [];
+
+            init();
+            animate();
+
+            function init() {
+                scene.add(light);
+                scene.add(camera);
+
+                updateCamera();
+
+                document.body.appendChild(renderer.domElement);
+                renderer.setSize(WIDTH, HEIGHT);
+
+                stats.domElement.style.position = 'absolute';
+                stats.domElement.style.top = '0px';
+                stats.domElement.style.zIndex = 100;
+                document.body.appendChild(stats.domElement);
+
+                var nodesF = gui.addFolder('Nodes');
+                var radiusControl = nodesF.add(this, 'radius', 1, 10);
+                radiusControl.onChange(function () {
+                    for(var i = 0; i < scene.objects.length; i++) {
+                        objects[i].scale.set(radius, radius, radius);
+                    }
+                });
+
+                var cameraF = gui.addFolder('Camera');
+                var zoomControl = cameraF.add(this, 'zoom', 0.1, 2);
+                zoomControl.onChange(function () {
+                    updateCamera();
+                });
+
+                // Add the ground plane
+                var ground = new THREE.Mesh(
+                    new THREE.PlaneGeometry(150, 150),
+                    new THREE.MeshLambertMaterial({ color: 0xDDDDDD })
+                );
+                ground.rotation.x = -Math.PI / 2;
+
+                scene.add(ground);
+            }
+
+            function updateCamera() {
+                camera.position.x = 100 / zoom;
+                camera.position.y = 100 / zoom;
+                camera.position.z = 100 / zoom;
+                camera.lookAt(new THREE.Vector3(0, 0, 0));
+            }
+
+            function animate() {
+                // Wait for the browser to request a frame.  For instance, it won't
+                // redraw when the browser is minimized or when another tab is open.
+                requestAnimationFrame(animate);
+
+                render();
+
+                stats.update();
+            }
+
+            function render() {
+                for(var i = 0; i < points.length; i++) {
+                    var point = points[i];
+                    var object = objects[i];
+
+                    object.position.set(point[0], point[1], point[2]);
+                }
+
+                renderer.render(scene, camera);
+            }
+
+            // TODO: Get a real address here
+            var socket = new MozWebSocket('ws://localhost:8080');
+
+            socket.onmessage = function (stuff) {
+                var data = JSON.parse(stuff.data);
+
+                // If we haven't yet entered the point into the scene (we are just
+                // loading the page)
+                if(points.length == 0) {
+                    // Add all the incoming points to the scene as spheres
+                    for(var i = 0; i < data.length; i++) {
+                        var point = data[i];
+                        var obj = makeSphere(point[0], point[1], point[2]);
+
+                        objects.push(obj);
+                        scene.add(obj);
+                    }
+                }
+
+                // Just update our local information about the points.  They will be
+                // redrawn when the browser requests a frame (see render()).
+                points = data;
+            };
+
+            function makeSphere(x, y, z) {
+                var mesh = new THREE.Mesh(
+                    new THREE.SphereGeometry(radius, segements, rings),
+                    new THREE.MeshLambertMaterial({ color: Math.floor(Math.random() * 0xFFFFFF) })
+                );
+
+                mesh.position.set(x, y, z);
+
+                return mesh;
+            }
+        </script>
+    </body>
+</html>

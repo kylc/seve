@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Seve", "Seve\Seve.csproj", "{1031724C-3EA9-49DF-9732-E1E4B19A4230}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1031724C-3EA9-49DF-9732-E1E4B19A4230}.Debug|x86.ActiveCfg = Debug|x86
+		{1031724C-3EA9-49DF-9732-E1E4B19A4230}.Debug|x86.Build.0 = Debug|x86
+		{1031724C-3EA9-49DF-9732-E1E4B19A4230}.Release|x86.ActiveCfg = Release|x86
+		{1031724C-3EA9-49DF-9732-E1E4B19A4230}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
