@@ -21,10 +21,10 @@ namespace Project_SEVE
             // because they are generally good for worlds with lots of motion.
             // Sweep and Prune Broadphases are best when most of the world is
             // static.
-            BroadphaseInterface broadphase = new DbvtBroadphase();
-            DefaultCollisionConfiguration collisionConfiguration = new DefaultCollisionConfiguration();
-            CollisionDispatcher dispatcher = new CollisionDispatcher(collisionConfiguration);
-            SequentialImpulseConstraintSolver solver = new SequentialImpulseConstraintSolver();
+            var broadphase = new DbvtBroadphase();
+            var collisionConfiguration = new DefaultCollisionConfiguration();
+            var dispatcher = new CollisionDispatcher(collisionConfiguration);
+            var solver = new SequentialImpulseConstraintSolver();
 
             DynamicsWorld = new DiscreteDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
             // Bullet uses a right-handed coordinate system, so Y is up, X is "right", and z is "left"
@@ -33,10 +33,10 @@ namespace Project_SEVE
             Ground = MakePlane(new Vector3(0, 1, 0), 1);
             DynamicsWorld.AddRigidBody(Ground);
 
-            Random r = new Random();
+            var random = new Random();
             for (int i = 0; i < 1000; i++)
             {
-                RigidBody sphere = MakeSphere(r.Next(10), r.Next(100), r.Next(10));
+                RigidBody sphere = MakeSphere(random.Next(10), random.Next(100), random.Next(10));
                 Spheres.Add(sphere);
                 DynamicsWorld.AddRigidBody(sphere);
             }
@@ -57,23 +57,23 @@ namespace Project_SEVE
 
         private RigidBody MakePlane(Vector3 normal, int constant)
         {
-            CollisionShape shape = new StaticPlaneShape(new Vector3(0, 1, 0), 1);
-            Matrix startTransform = Matrix.Translation(new Vector3(0, 0, 0));
-            DefaultMotionState motionState = new DefaultMotionState(startTransform);
-            RigidBodyConstructionInfo rigidBodyCI = new RigidBodyConstructionInfo(0, motionState, shape, new Vector3(0, 0, 0));
-            RigidBody plane = new RigidBody(rigidBodyCI);
+            var shape = new StaticPlaneShape(new Vector3(0, 1, 0), 1);
+            var startTransform = Matrix.Translation(new Vector3(0, 0, 0));
+            var motionState = new DefaultMotionState(startTransform);
+            var rigidBodyCI = new RigidBodyConstructionInfo(0, motionState, shape, new Vector3(0, 0, 0));
+            var plane = new RigidBody(rigidBodyCI);
 
             return plane;
         }
 
         private RigidBody MakeSphere(int x, int y, int z)
         {
-            CollisionShape sphereShape = new SphereShape(1);
-            Matrix sphereStartTransform = Matrix.Translation(new Vector3(x, y, z));
-            DefaultMotionState sphereMotionState = new DefaultMotionState(sphereStartTransform);
-            Vector3 sphereIntertia = sphereShape.CalculateLocalInertia(1);
-            RigidBodyConstructionInfo sphereRigidBodyCI = new RigidBodyConstructionInfo(1, sphereMotionState, sphereShape, sphereIntertia);
-            RigidBody sphere = new RigidBody(sphereRigidBodyCI);
+            var sphereShape = new SphereShape(1);
+            var sphereStartTransform = Matrix.Translation(new Vector3(x, y, z));
+            var sphereMotionState = new DefaultMotionState(sphereStartTransform);
+            var sphereIntertia = sphereShape.CalculateLocalInertia(1);
+            var sphereRigidBodyCI = new RigidBodyConstructionInfo(1, sphereMotionState, sphereShape, sphereIntertia);
+            var sphere = new RigidBody(sphereRigidBodyCI);
 
             return sphere;
         }

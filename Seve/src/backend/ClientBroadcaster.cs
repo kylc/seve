@@ -17,7 +17,7 @@ namespace Project_SEVE
 
         public void StartServer()
         {
-            WebSocketServer server = new WebSocketServer("ws://localhost:8080");
+            var server = new WebSocketServer("ws://localhost:8080");
             server.Start(socket =>
             {
                 socket.OnOpen = () => Connections.Add(socket);
