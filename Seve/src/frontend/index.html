@@ -29,6 +29,7 @@
                 stats = new Stats();
 
             var zoom = 1,
+                rotation = 45,
                 radius = 1,
                 segements = 10,
                 rings = 10;
@@ -69,6 +70,11 @@
                     updateCamera();
                 });
 
+                var rotationControl = cameraF.add(this, 'rotation', 0, 360);
+                rotationControl.onChange(function () {
+                    updateCamera();
+                });
+
                 // Add the ground plane
                 var ground = new THREE.Mesh(
                     new THREE.PlaneGeometry(150, 150),
@@ -80,9 +86,9 @@
             }
 
             function updateCamera() {
-                camera.position.x = 100 / zoom;
+                camera.position.x = Math.sin(rotation / 180 * Math.PI) * 150 / zoom;
                 camera.position.y = 100 / zoom;
-                camera.position.z = 100 / zoom;
+                camera.position.z = Math.cos(rotation / 180 * Math.PI) * 150 / zoom;
                 camera.lookAt(new THREE.Vector3(0, 0, 0));
             }
 
