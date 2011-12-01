@@ -40,8 +40,6 @@ namespace Project_SEVE
 
                 server.Broadcast(toSend.ToString());
             });
-
-            Console.Read();
         }
     }
 }
