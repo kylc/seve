@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ILC.Seve
+﻿namespace ILC.Seve
 {
     abstract class GASimulation
     {
