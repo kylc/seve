@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading;
 using BulletSharp;
 
-namespace Project_SEVE
+namespace ILC.Seve
 {
     class Program
     {

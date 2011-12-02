@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Project_SEVE
+namespace ILC.Seve
 {
     class DirectedNode
     {

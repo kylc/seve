@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using BulletSharp;
 
-namespace Project_SEVE
+namespace ILC.Seve
 {
     // TODO: This is only a testing stage.  Probably need to rewrite all of this for the actual thing.
     public class PhysicsDemo
