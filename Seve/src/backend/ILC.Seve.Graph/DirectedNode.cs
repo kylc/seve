@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ILC.Seve
+namespace ILC.Seve.Genetics
 {
     class DirectedNode
     {
@@ -8,6 +8,11 @@ namespace ILC.Seve
         {
             Parent = parent;
             Children = new List<DirectedNode>();
+        }
+
+        public bool IsRoot()
+        {
+            return (Parent == null);
         }
 
         public bool IsLeaf()

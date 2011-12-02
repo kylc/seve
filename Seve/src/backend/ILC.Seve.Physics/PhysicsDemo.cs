@@ -42,6 +42,13 @@ namespace ILC.Seve.Physics
             }
         }
 
+        /// <summary>
+        /// Simulate the world physics for the specified amount of time,
+        /// calling the callback at each tick.  Note that this method will
+        /// block until the simulation is complete.
+        /// </summary>
+        /// <param name="seconds">how many seconds to run the simulation</param>
+        /// <param name="tick">a callback for each physics tick (60 times per second)</param>
         public void RunSimulation(int seconds, Action tick)
         {
             for (int i = 0; i < seconds * 60; i++)
