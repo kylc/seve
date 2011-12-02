@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Fleck;
 
-namespace ILC.Seve
+namespace ILC.Seve.Web
 {
     class ClientBroadcaster
     {

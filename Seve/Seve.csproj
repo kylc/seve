@@ -8,7 +8,7 @@
     <ProjectGuid>{1031724C-3EA9-49DF-9732-E1E4B19A4230}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Project_SEVE</RootNamespace>
+    <RootNamespace>ILC.Seve</RootNamespace>
     <AssemblyName>Seve</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -50,14 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\backend\DirectedNode.cs" />
-    <Compile Include="src\backend\GADirectedSimulation.cs" />
-    <Compile Include="src\backend\GASimulation.cs" />
-    <Compile Include="src\backend\GAUndirectedSimulation.cs" />
-    <Compile Include="src\backend\PhysicsDemo.cs" />
-    <Compile Include="src\backend\Program.cs" />
-    <Compile Include="src\backend\UndirectedNode.cs" />
-    <Compile Include="src\backend\ClientBroadcaster.cs" />
+    <Compile Include="src\backend\ILC.Seve\DirectedNode.cs" />
+    <Compile Include="src\backend\ILC.Seve\GADirectedSimulation.cs" />
+    <Compile Include="src\backend\ILC.Seve\GASimulation.cs" />
+    <Compile Include="src\backend\ILC.Seve\GAUndirectedSimulation.cs" />
+    <Compile Include="src\backend\ILC.Seve.Physics\PhysicsDemo.cs" />
+    <Compile Include="src\backend\ILC.Seve\Program.cs" />
+    <Compile Include="src\backend\ILC.Seve\UndirectedNode.cs" />
+    <Compile Include="src\backend\ILC.Seve.Web\ClientBroadcaster.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\frontend\index.html" />
