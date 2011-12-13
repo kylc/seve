@@ -79,8 +79,6 @@
     <Compile Include="ILC.Seve.Physics\PhysicsWorld.cs" />
     <Compile Include="ILC.Seve\Simulation.cs" />
     <Compile Include="ILC.Seve.Web\ClientBroadcaster.cs" />
-    <Compile Include="ILC.Seve.Examples.Bridge\BridgeIndividual.cs" />
-    <Compile Include="ILC.Seve.Examples.Bridge\BridgeSimulation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="frontend\index.html" />
