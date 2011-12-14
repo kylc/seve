@@ -28,19 +28,14 @@ namespace ILC.Seve.Examples.Skyscraper
             }
         }
 
-        public override Individual Cross(Individual b)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Individual Mutate()
-        {
-            throw new NotImplementedException();
-        }
-
         public override int CalculateFitness(VertexGraph graph)
         {
             return (int) (graph.Vertices.OrderBy(a => a.Y).First().Y * 100);
+        }
+
+        public override byte[] ToBinary()
+        {
+            throw new NotImplementedException();
         }
     }
 }

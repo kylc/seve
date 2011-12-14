@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperSimulation.cs" />
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperIndividual.cs" />
+    <Compile Include="ILC.Seve\IBinaryRepresentable.cs" />
     <Compile Include="ILC.Seve\ParallelSimulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ILC.Seve.Genetics\Individual.cs" />
