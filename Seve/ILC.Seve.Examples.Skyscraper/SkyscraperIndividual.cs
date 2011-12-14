@@ -5,7 +5,7 @@ using ILC.Seve.Graph;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
-    class SkyscraperIndividual : Individual
+    public class SkyscraperIndividual : Individual
     {
         public SkyscraperIndividual()
         {

@@ -8,7 +8,7 @@ namespace ILC.Seve.Genetics
     /// This class is to have unique implementations depending on the
     /// problem at hand.
     /// </summary>
-    abstract class Individual : IComparable
+    public abstract class Individual : IComparable
     {
         public VertexGraph Graph { get; set; }
         public int Fitness { get; set; }
@@ -42,7 +42,6 @@ namespace ILC.Seve.Genetics
         /// long as a more fit individual always has a higher fitness than
         /// a less fit individual.</returns>
         public abstract int CalculateFitness(VertexGraph graph);
-
 
         public int CompareTo(object obj)
         {

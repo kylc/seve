@@ -3,7 +3,7 @@ using Fleck;
 
 namespace ILC.Seve.Web
 {
-    class ClientBroadcaster
+    public class ClientBroadcaster
     {
         public List<IWebSocketConnection> Connections { get; private set;  }
 

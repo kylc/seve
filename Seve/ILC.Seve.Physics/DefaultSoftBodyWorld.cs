@@ -6,7 +6,7 @@ using ILC.Seve.Graph;
 
 namespace ILC.Seve.Physics
 {
-    class DefaultSoftBodyWorld : PhysicsWorld
+    public class DefaultSoftBodyWorld : PhysicsWorld
     {
         public SoftRigidDynamicsWorld DynamicsWorld { get; private set; }
         public SoftBodyWorldInfo WorldInfo { get; private set; }

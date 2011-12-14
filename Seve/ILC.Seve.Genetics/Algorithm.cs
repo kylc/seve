@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ILC.Seve.Genetics
 {
-    class Algorithm
+    public class Algorithm
     {
         public List<Individual> Population;
 

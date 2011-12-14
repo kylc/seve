@@ -4,7 +4,7 @@ using ILC.Seve.Genetics;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
-    class SkyscraperSimulation
+    public class SkyscraperSimulation
     {
         public const int PopulationSize = 20;
         public const int RunForGenerations = 100;
@@ -18,7 +18,7 @@ namespace ILC.Seve.Examples.Skyscraper
                 individuals.Add(new SkyscraperIndividual());
             }
 
-            var simulation = new Simulation(individuals);
+            var simulation = new ParallelSimulation(individuals);
             simulation.RunSimulation();
         }
     }

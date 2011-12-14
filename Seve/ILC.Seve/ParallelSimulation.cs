@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using ILC.Seve.Genetics;
 using ILC.Seve.Graph;
 using ILC.Seve.Physics;
-using ILC.Seve.Web;
-using System.Threading.Tasks;
 
 namespace ILC.Seve
 {
-    class Simulation
+    public class ParallelSimulation : ISimulation
     {
         private List<Individual> Population;
 
-        public Simulation(List<Individual> population)
+        public ParallelSimulation(List<Individual> population)
         {
             Population = population;
         }

@@ -2,7 +2,7 @@
 
 namespace ILC.Seve.Physics
 {
-    class PhysicsHelpers
+    public class PhysicsHelpers
     {
         public static RigidBody MakePlane(Vector3 normal, int constant)
         {
