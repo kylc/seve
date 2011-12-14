@@ -7,10 +7,8 @@ namespace ILC.Seve.Examples.Skyscraper
 {
     public class SkyscraperIndividual : Individual
     {
-        public SkyscraperIndividual()
+        public SkyscraperIndividual() : base()
         {
-            Graph = new VertexGraph();
-
             // Add a bunch of random vertices to the graph
             var random = new Random();
             for (int i = 0; i < 20; i++)
