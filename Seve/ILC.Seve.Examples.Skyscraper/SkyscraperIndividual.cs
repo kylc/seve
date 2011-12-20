@@ -32,10 +32,5 @@ namespace ILC.Seve.Examples.Skyscraper
         {
             return (int) (graph.Vertices.OrderBy(a => a.Y).First().Y * 100);
         }
-
-        public override byte[] ToBinary()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

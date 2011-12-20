@@ -7,10 +7,16 @@ namespace ILC.Seve.Genetics
     public class Algorithm
     {
         public List<Individual> Population;
+        private ICrossFunction CrossFunction;
+        private IMutateFunction MutateFunction;
+        private IBinarySerializer Serializer;
 
-        public Algorithm(List<Individual> initialPopulation)
+        public Algorithm(List<Individual> initialPopulation, ICrossFunction crossFunction, IMutateFunction mutateFunction, IBinarySerializer serializer)
         {
             Population = initialPopulation;
+            CrossFunction = crossFunction;
+            MutateFunction = mutateFunction;
+            Serializer = serializer;
         }
 
         public void Step()
@@ -29,7 +35,7 @@ namespace ILC.Seve.Genetics
                 var father = Population.ElementAt(i);
                 var mother = Population.ElementAt(i + 1);
 
-                var child = father.Cross(mother);
+                var child = CrossFunction.Cross(father, mother, Serializer);
                 Population.Add(child);
             }
 
@@ -37,10 +43,8 @@ namespace ILC.Seve.Genetics
             var random = new Random();
             foreach (var individual in Population)
             {
-                if (random.Next(100) < 5) // 5% chance of mutation (TODO: is this too high?)
-                {
-                    individual.Mutate();
-                }
+                // The MutatateFunction handles probability for us
+                MutateFunction.Mutate(individual, Serializer);
             }
         }
     }

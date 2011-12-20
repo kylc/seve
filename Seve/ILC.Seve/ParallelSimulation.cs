@@ -10,10 +10,12 @@ namespace ILC.Seve
 {
     public class ParallelSimulation : ISimulation
     {
+        private Algorithm Algorithm;
         private List<Individual> Population;
 
-        public ParallelSimulation(List<Individual> population)
+        public ParallelSimulation(Algorithm algorithm, List<Individual> population)
         {
+            Algorithm = algorithm;
             Population = population;
         }
 
@@ -31,10 +33,9 @@ namespace ILC.Seve
                 individual.Fitness = individual.CalculateFitness(resultantGraph);
             });
 
-            var algorithm = new Algorithm(Population);
             for (int i = 0; i < 100; i++)
             {
-                algorithm.Step();
+                Algorithm.Step();
             }
         }
 
