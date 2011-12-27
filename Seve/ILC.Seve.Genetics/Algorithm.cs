@@ -41,11 +41,11 @@ namespace ILC.Seve.Genetics
 
             // Randomly mutate some individuals
             var random = new Random();
-            foreach (var individual in Population)
-            {
+
+            Population.Select(individual => {
                 // The MutatateFunction handles probability for us
-                MutateFunction.Mutate(individual, Serializer);
-            }
+                return MutateFunction.Mutate(individual, Serializer);
+            });
         }
     }
 }

@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperBinaryConstructor.cs" />
+    <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperBinarySerializer.cs" />
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperSimulation.cs" />
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperIndividual.cs" />
     <Compile Include="ILC.Seve.Genetics\ConstantCrossFunction.cs" />

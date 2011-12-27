@@ -11,30 +11,31 @@ namespace ILC.Seve
     public class ParallelSimulation : ISimulation
     {
         private Algorithm Algorithm;
-        private List<Individual> Population;
 
-        public ParallelSimulation(Algorithm algorithm, List<Individual> population)
+        public ParallelSimulation(Algorithm algorithm)
         {
             Algorithm = algorithm;
-            Population = population;
         }
 
         public void RunSimulation()
         {
             Console.WriteLine("Running Simulation...");
 
-            Parallel.ForEach(Population, individual =>
-            {
-                Console.WriteLine("Testing individual {0}/{1} on thread {2}...", 
-                    Population.IndexOf(individual) + 1, Population.Count,
-                    Thread.CurrentThread.ManagedThreadId);
-
-                var resultantGraph = RunPhysics(individual);
-                individual.Fitness = individual.CalculateFitness(resultantGraph);
-            });
-
             for (int i = 0; i < 100; i++)
             {
+                var population = Algorithm.Population;
+
+                Parallel.ForEach(population, individual =>
+                {
+                    Console.WriteLine("Testing individual {0}/{1} on thread {2}...",
+                        population.IndexOf(individual) + 1, population.Count,
+                        Thread.CurrentThread.ManagedThreadId);
+
+                    var resultantGraph = RunPhysics(individual);
+                    individual.Fitness = individual.CalculateFitness(resultantGraph);
+                    Console.WriteLine(individual.Fitness);
+                });
+
                 Algorithm.Step();
             }
         }

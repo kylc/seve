@@ -20,7 +20,7 @@ namespace ILC.Seve.Genetics
                 // TODO: Mutate
             }
 
-            throw new NotImplementedException();
+            return individual; // throw new NotImplementedException();
         }
     }
 }

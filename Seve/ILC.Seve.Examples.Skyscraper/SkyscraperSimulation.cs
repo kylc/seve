@@ -26,7 +26,7 @@ namespace ILC.Seve.Examples.Skyscraper
             var constructor = new SkyscraperBinarySerializer();
 
             var algorithm = new Algorithm(individuals, crossFunction, mutateFunction, constructor);
-            var simulation = new ParallelSimulation(algorithm, individuals);
+            var simulation = new ParallelSimulation(algorithm);
             simulation.RunSimulation();
         }
     }
