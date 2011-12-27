@@ -35,22 +35,27 @@ namespace ILC.Seve.Examples.Skyscraper
         public Individual FromBinary(byte[] data)
         {
             var graph = new VertexGraph();
-            var reader = new BinaryReader(new MemoryStream(data));
+            var stream = new MemoryStream(data);
 
-            var count = reader.ReadInt32();
-
-            for (int i = 0; i < count; i++)
+            using (stream)
             {
-                var vertex = new Vertex(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
-                graph.Vertices.Add(vertex);
+                var reader = new BinaryReader(stream);
+
+                var count = reader.ReadInt32();
+
+                for (int i = 0; i < count; i++)
+                {
+                    var vertex = new Vertex(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+                    graph.Vertices.Add(vertex);
+                }
+
+                var individual = new SkyscraperIndividual(graph);
+
+                // Use ConnectNearest to restore connections.  This is less than ideal.
+                individual.ConnectNearest(2);
+
+                return individual;
             }
-
-            var individual = new SkyscraperIndividual(graph);
-
-            // Use ConnectNearest to restore connections.  This is less than ideal.
-            individual.ConnectNearest(2);
-
-            return individual;
         }
     }
 }
