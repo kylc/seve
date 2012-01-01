@@ -17,8 +17,6 @@ namespace ILC.Seve.Physics
 
         public DefaultSoftBodyWorld(VertexGraph initialState)
         {
-            LastState = initialState;
-
             // Broadphase algorithms are responsible for calculating bounding
             // boxes.  We should probably use an AABB Tree (DbvtBroadphase)
             // because they are generally good for worlds with lots of motion.
@@ -33,7 +31,7 @@ namespace ILC.Seve.Physics
             // Bullet uses a right-handed coordinate system, so Y is up, X is "right", and z is "left"
             DynamicsWorld.Gravity = new Vector3(0F, -9.81F, 0F); // Y is the traditional Z axis
 
-            Ground = PhysicsHelpers.MakePlane(new Vector3(0, 1, 0), 1);
+            Ground = PhysicsHelpers.MakePlane(new Vector3(0, 1, 0), 0);
             DynamicsWorld.AddRigidBody(Ground);
 
             WorldInfo = new SoftBodyWorldInfo();
@@ -65,6 +63,8 @@ namespace ILC.Seve.Physics
 
             Individual = SoftBodyHelpers.CreateFromConvexHull(WorldInfo, vertices);
 
+            DynamicsWorld.AddSoftBody(Individual);
+
             // Now assign the proper GUIDs to each node.
             // TODO: Is there a better way to do this?  At creation (above), perhaps?
             foreach (Node node in Individual.Nodes)
@@ -72,16 +72,15 @@ namespace ILC.Seve.Physics
                 Vector3 location = node.X;
                 foreach (Vertex vertex in graph.Vertices)
                 {
-                    if (location.X == vertex.X
-                        && location.Y == vertex.Y
-                        && location.Z == vertex.Z)
+                    // TODO: Floating point comparisons are failing here, but integers aren't accurate enough...
+                    if ((int)location.X == (int)vertex.X
+                        && (int)location.Y == (int)vertex.Y
+                        && (int)location.Z == (int)vertex.Z)
                     {
                         node.Tag = vertex.Identifier;
                     }
                 }
             }
-
-            DynamicsWorld.AddSoftBody(Individual);
         }
 
         public override void StepSimulation(int frequency)

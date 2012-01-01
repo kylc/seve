@@ -27,7 +27,7 @@ namespace ILC.Seve.Genetics
             var targetSize = Population.Count;
 
             // Sort the population by the calculated fitnesses
-            Population.Sort();
+            Population.OrderByDescending(individual => individual.Fitness);
 
             // Select and breed the top portion of the population
             Population = Population.Take(Population.Count / 2).ToList();

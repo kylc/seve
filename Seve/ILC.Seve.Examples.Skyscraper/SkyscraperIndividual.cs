@@ -7,13 +7,14 @@ namespace ILC.Seve.Examples.Skyscraper
 {
     public class SkyscraperIndividual : Individual
     {
+        private static Random Random = new Random();
+
         public SkyscraperIndividual() : base()
         {
             // Add a bunch of random vertices to the graph
-            var random = new Random();
             for (int i = 0; i < 20; i++)
             {
-                var vertex = new Vertex(random.Next(50), random.Next(50), random.Next(50));
+                var vertex = new Vertex(Random.Next(500), Random.Next(500), Random.Next(500));
                 Graph.Vertices.Add(vertex);
             }
 
@@ -38,9 +39,9 @@ namespace ILC.Seve.Examples.Skyscraper
             }
         }
 
-        public override int CalculateFitness(VertexGraph graph)
+        public override int CalculateFitness()
         {
-            return (int) (graph.Vertices.OrderBy(a => a.Y).First().Y * 100);
+            return (int) Graph.Vertices.OrderByDescending(a => a.Y).First().Y;
         }
     }
 }

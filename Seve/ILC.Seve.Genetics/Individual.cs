@@ -27,7 +27,7 @@ namespace ILC.Seve.Genetics
         /// <returns>A score.  This does not ned to be anything specific, as
         /// long as a more fit individual always has a higher fitness than
         /// a less fit individual.</returns>
-        public abstract int CalculateFitness(VertexGraph graph);
+        public abstract int CalculateFitness();
 
         public int CompareTo(object obj)
         {

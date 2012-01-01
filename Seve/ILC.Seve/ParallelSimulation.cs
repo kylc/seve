@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ILC.Seve.Genetics;
@@ -32,8 +32,8 @@ namespace ILC.Seve
                         Thread.CurrentThread.ManagedThreadId);
 
                     var resultantGraph = RunPhysics(individual);
-                    individual.Fitness = individual.CalculateFitness(resultantGraph);
-                    Console.WriteLine(individual.Fitness);
+                    individual.Graph = resultantGraph;
+                    individual.Fitness = individual.CalculateFitness();
                 });
 
                 Algorithm.Step();

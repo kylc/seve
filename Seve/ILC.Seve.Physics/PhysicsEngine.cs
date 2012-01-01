@@ -29,7 +29,6 @@ namespace ILC.Seve.Physics
                 PhysicalWorld.StepSimulation(60);
             }
 
-            // TODO: Generate graph from physics data
             return PhysicalWorld.GetState();
         }
     }
