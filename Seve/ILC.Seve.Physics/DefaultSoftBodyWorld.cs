@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using BulletSharp;
+﻿using BulletSharp;
 using BulletSharp.SoftBody;
 using ILC.Seve.Graph;
 
@@ -55,8 +53,7 @@ namespace ILC.Seve.Physics
             // by Bullet.
             for (var i = 0; i < vertices.Length; i++)
             {
-                // TODO: Is ElementAt slow for this?
-                var vertex = graph.Vertices.ElementAt(i);
+                var vertex = graph.Vertices[i];
 
                 vertices[i] = new Vector3(vertex.X, vertex.Y, vertex.Z);
             }
