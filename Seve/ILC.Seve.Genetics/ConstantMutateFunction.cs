@@ -9,7 +9,8 @@ namespace ILC.Seve.Genetics
     public class ConstantMutateFunction : IMutateFunction
     {
         public int MutationPercent { get; set; }
-        private Random Random;
+
+        private static Random Random;
 
         public ConstantMutateFunction(int mutationPercent)
         {
@@ -19,12 +20,16 @@ namespace ILC.Seve.Genetics
 
         public Individual Mutate(Individual individual, IBinarySerializer serializer)
         {
+            byte[] data = serializer.ToBinary(individual);
+
             if (Random.Next(100) < MutationPercent)
             {
-                // TODO: Mutate
+                var mutateIndex = Random.Next(data.Length);
+
+                data[mutateIndex] = (byte)Random.Next(256);
             }
 
-            return individual; // throw new NotImplementedException();
+            return serializer.FromBinary(data);
         }
     }
 }
