@@ -29,7 +29,6 @@ namespace ILC.Seve.Genetics
 
             byte[] childData = new byte[fatherData.Length];
 
-            // TODO: High probability of an off-by-one error here
             Array.Copy(fatherData, childData, Constant);
             Array.Copy(motherData, Constant, childData, Constant, childData.Length - Constant);
 
