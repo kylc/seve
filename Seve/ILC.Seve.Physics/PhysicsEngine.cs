@@ -7,6 +7,10 @@ using BulletSharp.SoftBody;
 
 namespace ILC.Seve.Physics
 {
+    /// <summary>
+    /// The core of the Physics namespace.  This is responsible for interacting
+    /// with a PhysicsWorld, telling it when to update.
+    /// </summary>
     public class PhysicsEngine
     {
         public PhysicsWorld PhysicalWorld { get; set; }

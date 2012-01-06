@@ -5,12 +5,16 @@ namespace ILC.Seve.Genetics
 {
     /// <summary>
     /// Represents a single individual in the Genetic Algorithm simulation.
-    /// This class is to have unique implementations depending on the
-    /// problem at hand.
+    /// This class is to have unique implementations depending on the problem
+    /// at hand.
     /// </summary>
     public abstract class Individual : IComparable
     {
         public VertexGraph Graph { get; set; }
+
+        /// <summary>
+        /// A cached fitness value.
+        /// </summary>
         public int Fitness { get; set; }
 
         /// <summary>
@@ -22,7 +26,9 @@ namespace ILC.Seve.Genetics
         }
 
         /// <summary>
-        /// Assess the fitness of the individual.
+        /// Assess the fitness of the individual.  This operation may take a
+        /// while, so the value should be stored and accessed from the Fitness
+        /// property.
         /// </summary>
         /// <returns>A score.  This does not ned to be anything specific, as
         /// long as a more fit individual always has a higher fitness than

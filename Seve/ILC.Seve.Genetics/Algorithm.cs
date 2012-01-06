@@ -4,6 +4,12 @@ using System.Linq;
 
 namespace ILC.Seve.Genetics
 {
+    /// <summary>
+    /// This class is responsible for performing all operations of the Genetic
+    /// Algorithm.  It takes a bunch of individuals as an input (along with
+    /// their fitness values) and allows the caller to step from one generation
+    /// to the next.
+    /// </summary>
     public class Algorithm
     {
         public List<Individual> Population;
@@ -19,6 +25,10 @@ namespace ILC.Seve.Genetics
             Serializer = serializer;
         }
 
+        /// <summary>
+        /// Progress the population to the next generation.  This method
+        /// handles all crossing and mutating.
+        /// </summary>
         public void Step()
         {
             // Fitness is assigned in Simulation class

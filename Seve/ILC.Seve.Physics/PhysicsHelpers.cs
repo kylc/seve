@@ -2,6 +2,9 @@
 
 namespace ILC.Seve.Physics
 {
+    /// <summary>
+    /// Some helpful methods for dealing with BulletSharp.
+    /// </summary>
     public class PhysicsHelpers
     {
         public static RigidBody MakePlane(Vector3 normal, int constant)

@@ -2,6 +2,10 @@
 
 namespace ILC.Seve.Genetics
 {
+    /// <summary>
+    /// A mutation function that gives each individual a constant change of
+    /// being mutated.
+    /// </summary>
     public class ConstantMutateFunction : IMutateFunction
     {
         public int MutationPercent { get; set; }

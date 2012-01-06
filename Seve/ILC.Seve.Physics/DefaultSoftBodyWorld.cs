@@ -4,6 +4,11 @@ using ILC.Seve.Graph;
 
 namespace ILC.Seve.Physics
 {
+    /// <summary>
+    /// A basic implementation of a PhysicsWorld.  This implementation utilizes
+    /// Bullet's soft body dynamics engine to simulate individuals in a very
+    /// simplistic manner.
+    /// </summary>
     public class DefaultSoftBodyWorld : PhysicsWorld
     {
         public SoftRigidDynamicsWorld DynamicsWorld { get; private set; }

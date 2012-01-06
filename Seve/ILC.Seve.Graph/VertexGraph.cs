@@ -5,6 +5,9 @@ using System.Text;
 
 namespace ILC.Seve.Graph
 {
+    /// <summary>
+    /// Represents a grouping of vertices of which an individual is composed.
+    /// </summary>
     public class VertexGraph
     {
         public List<Vertex> Vertices { get; set; }
@@ -15,8 +18,15 @@ namespace ILC.Seve.Graph
         }
     }
 
+    /// <summary>
+    /// A vertex.  Each vertex has an x, y, and z coordinate in space.
+    /// </summary>
     public class Vertex
     {
+        /// <summary>
+        /// A unique identifier used to link a Vertex to its associated
+        /// BulletSharp node.
+        /// </summary>
         public Guid Identifier;
 
         public float X { get; set; }

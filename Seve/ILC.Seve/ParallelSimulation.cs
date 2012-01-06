@@ -8,6 +8,10 @@ using ILC.Seve.Physics;
 
 namespace ILC.Seve
 {
+    /// <summary>
+    /// A simulation runner that tests individuals in parallel, utilizing
+    /// multiple CPU cores.
+    /// </summary>
     public class ParallelSimulation : ISimulation
     {
         private Algorithm Algorithm;
@@ -21,6 +25,7 @@ namespace ILC.Seve
         {
             Console.WriteLine("Running Simulation...");
 
+            // Each iteration is moving from one generation to the next
             for (int i = 0; i < 100; i++)
             {
                 var population = Algorithm.Population;
