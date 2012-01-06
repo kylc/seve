@@ -42,7 +42,6 @@ namespace ILC.Seve.Physics
             AddVertexGraph(initialState);
         }
 
-
         private void AddVertexGraph(VertexGraph graph)
         {
             LastState = graph;

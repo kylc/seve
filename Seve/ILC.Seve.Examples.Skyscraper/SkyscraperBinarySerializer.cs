@@ -51,9 +51,6 @@ namespace ILC.Seve.Examples.Skyscraper
 
                 var individual = new SkyscraperIndividual(graph);
 
-                // Use ConnectNearest to restore connections.  This is less than ideal.
-                individual.ConnectNearest(2);
-
                 return individual;
             }
         }
