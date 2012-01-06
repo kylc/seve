@@ -38,7 +38,6 @@ namespace ILC.Seve
 
                     var resultantGraph = RunPhysics(individual);
                     individual.Graph = resultantGraph;
-                    individual.Fitness = individual.CalculateFitness();
                 });
 
                 Algorithm.Step();

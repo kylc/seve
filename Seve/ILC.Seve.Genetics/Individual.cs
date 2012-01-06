@@ -15,7 +15,20 @@ namespace ILC.Seve.Genetics
         /// <summary>
         /// A cached fitness value.
         /// </summary>
-        public int Fitness { get; set; }
+        public int Fitness
+        {
+            get
+            {
+                if (!_fitness.HasValue)
+                {
+                    _fitness = CalculateFitness();
+                }
+
+                return _fitness.Value;
+            }
+        }
+
+        private int? _fitness;
 
         /// <summary>
         /// Creates a random individual to be used in the initial population.
