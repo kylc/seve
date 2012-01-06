@@ -8,7 +8,7 @@ namespace ILC.Seve.Genetics
     /// </summary>
     public class ConstantMutateFunction : IMutateFunction
     {
-        public int MutationPercent { get; set; }
+        public readonly int MutationPercent;
 
         private static Random Random;
 

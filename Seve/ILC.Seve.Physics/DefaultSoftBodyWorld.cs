@@ -11,12 +11,12 @@ namespace ILC.Seve.Physics
     /// </summary>
     public class DefaultSoftBodyWorld : PhysicsWorld
     {
-        public SoftRigidDynamicsWorld DynamicsWorld { get; private set; }
-        public SoftBodyWorldInfo WorldInfo { get; private set; }
-        public RigidBody Ground { get; private set; }
-        public SoftBody Individual { get; private set; }
+        private SoftRigidDynamicsWorld DynamicsWorld;
+        private SoftBodyWorldInfo WorldInfo;
+        private RigidBody Ground;
+        private SoftBody Individual;
 
-        public VertexGraph LastState { get; private set; }
+        private VertexGraph LastState;
 
         public DefaultSoftBodyWorld(VertexGraph initialState)
         {
