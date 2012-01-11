@@ -71,13 +71,12 @@ namespace ILC.Seve.Physics
             // TODO: Is there a better way to do this?  At creation (above), perhaps?
             foreach (Node node in Individual.Nodes)
             {
-                Vector3 location = node.X;
                 foreach (Vertex vertex in graph.Vertices)
                 {
                     // TODO: Floating point comparisons are failing here, but integers aren't accurate enough...
-                    if ((int)location.X == (int)vertex.X
-                        && (int)location.Y == (int)vertex.Y
-                        && (int)location.Z == (int)vertex.Z)
+                    if ((int)vertex.X == (int)node.X.X
+                        && (int)vertex.Y == (int)node.X.Y
+                        && (int)vertex.Z == (int)node.X.Z)
                     {
                         node.Tag = vertex.Identifier;
                     }
