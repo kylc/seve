@@ -9,6 +9,7 @@ namespace ILC.Seve.Examples.Skyscraper
         public const int PopulationSize = 20;
         public const int RunForGenerations = 100;
 
+        // TODO: Make this the right constant.
         public const int CrossConstant = 50;
         public const int MutatePercent = 5;
 

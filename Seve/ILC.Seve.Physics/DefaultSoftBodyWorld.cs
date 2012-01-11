@@ -25,6 +25,7 @@ namespace ILC.Seve.Physics
             // because they are generally good for worlds with lots of motion.
             // Sweep and Prune Broadphases are best when most of the world is
             // static.
+            // TODO: Use Dispose on these?
             var broadphase = new DbvtBroadphase();
             var collisionConfiguration = new SoftBodyRigidBodyCollisionConfiguration();
             var dispatcher = new CollisionDispatcher(collisionConfiguration);
