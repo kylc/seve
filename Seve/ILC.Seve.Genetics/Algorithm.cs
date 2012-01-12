@@ -45,8 +45,10 @@ namespace ILC.Seve.Genetics
 
             while(Population.Count < targetSize)
             {
-                var father = Population.ElementAt(random.Next(Population.Count));
-                var mother = Population.ElementAt(random.Next(Population.Count));
+                // TODO: Fix this.  Father could be the mother as well, also,
+                // it's broken.
+                var father = Population[random.Next(Population.Count)];
+                var mother = Population[random.Next(Population.Count)];
 
                 var child = CrossFunction.Cross(father, mother, Serializer);
                 Population.Add(child);
