@@ -11,27 +11,31 @@ namespace ILC.Seve.Physics
     /// </summary>
     public class DefaultSoftBodyWorld : PhysicsWorld
     {
-        private SoftRigidDynamicsWorld DynamicsWorld;
-        private SoftBodyWorldInfo WorldInfo;
-        private RigidBody Ground;
-        private SoftBody Individual;
+        private static DbvtBroadphase Broadphase;
+        private static SoftBodyRigidBodyCollisionConfiguration CollisionConfiguration;
+        private static CollisionDispatcher Dispatcher;
+        private static SequentialImpulseConstraintSolver Solver;
 
+        private static SoftRigidDynamicsWorld DynamicsWorld;
+        private static SoftBodyWorldInfo WorldInfo;
+        private static RigidBody Ground;
+
+        private SoftBody Individual;
         private VertexGraph LastState;
 
-        public DefaultSoftBodyWorld(VertexGraph initialState)
+        static DefaultSoftBodyWorld()
         {
             // Broadphase algorithms are responsible for calculating bounding
             // boxes.  We should probably use an AABB Tree (DbvtBroadphase)
             // because they are generally good for worlds with lots of motion.
             // Sweep and Prune Broadphases are best when most of the world is
             // static.
-            // TODO: Use Dispose on these?
-            var broadphase = new DbvtBroadphase();
-            var collisionConfiguration = new SoftBodyRigidBodyCollisionConfiguration();
-            var dispatcher = new CollisionDispatcher(collisionConfiguration);
-            var solver = new SequentialImpulseConstraintSolver();
+            Broadphase = new DbvtBroadphase();
+            CollisionConfiguration = new SoftBodyRigidBodyCollisionConfiguration();
+            Dispatcher = new CollisionDispatcher(CollisionConfiguration);
+            Solver = new SequentialImpulseConstraintSolver();
 
-            DynamicsWorld = new SoftRigidDynamicsWorld(dispatcher, broadphase, solver, collisionConfiguration);
+            DynamicsWorld = new SoftRigidDynamicsWorld(Dispatcher, Broadphase, Solver, CollisionConfiguration);
             // Bullet uses a right-handed coordinate system, so Y is up, X is "right", and z is "left"
             DynamicsWorld.Gravity = new Vector3(0F, -9.81F, 0F); // Y is the traditional Z axis
 
@@ -41,10 +45,13 @@ namespace ILC.Seve.Physics
             WorldInfo = new SoftBodyWorldInfo();
             WorldInfo.AirDensity = 1.2F;
             WorldInfo.Gravity = new Vector3(0, -9.81F, 0);
-            WorldInfo.Dispatcher = dispatcher;
-            WorldInfo.Broadphase = broadphase;
+            WorldInfo.Dispatcher = Dispatcher;
+            WorldInfo.Broadphase = Broadphase;
             WorldInfo.SparseSdf.Initialize();
+        }
 
+        public DefaultSoftBodyWorld(VertexGraph initialState)
+        {
             AddVertexGraph(initialState);
         }
 
@@ -93,7 +100,7 @@ namespace ILC.Seve.Physics
         {
             foreach (Vertex vertex in LastState.Vertices)
             {
-                foreach (Node node in Individual.Nodes)
+                foreach(Node node in Individual.Nodes)
                 {
                     if (vertex.Identifier.Equals(node.Tag))
                     {
@@ -105,6 +112,11 @@ namespace ILC.Seve.Physics
             }
 
             return LastState;
+        }
+
+        public void DisposeIndividual()
+        {
+            DynamicsWorld.RemoveSoftBody(Individual);
         }
     }
 }

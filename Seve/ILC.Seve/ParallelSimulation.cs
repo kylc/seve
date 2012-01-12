@@ -30,7 +30,7 @@ namespace ILC.Seve
             {
                 var population = Algorithm.Population;
 
-                Parallel.ForEach(population, individual =>
+                foreach(var individual in population)
                 {
                     Console.WriteLine("Testing individual {0}/{1} on thread {2}...",
                         population.IndexOf(individual) + 1, population.Count,
@@ -38,7 +38,11 @@ namespace ILC.Seve
 
                     var resultantGraph = RunPhysics(individual);
                     individual.Graph = resultantGraph;
-                });
+
+                }
+
+                Console.WriteLine("Average fitness of generation: {0}",
+                    population.Select(a => a.Fitness).Average());
 
                 Algorithm.Step();
             }
@@ -51,7 +55,11 @@ namespace ILC.Seve
 
             // Run for 30 seconds of simulated time
             // TODO: Increase this, it just makes it easier to test
-            return physics.RunSimulation(30);
+            var graph = physics.RunSimulation(60);
+
+            world.DisposeIndividual();
+
+            return graph;
         }
     }
 }
