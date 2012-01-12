@@ -29,11 +29,11 @@ namespace ILC.Seve.Graph
         /// </summary>
         public Guid Identifier;
 
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
+        public byte X { get; set; }
+        public byte Y { get; set; }
+        public byte Z { get; set; }
 
-        public Vertex(float X, float Y, float Z)
+        public Vertex(byte X, byte Y, byte Z)
         {
             Identifier = Guid.NewGuid();
 

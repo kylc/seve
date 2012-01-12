@@ -14,7 +14,7 @@ namespace ILC.Seve.Examples.Skyscraper
             // Add a bunch of random vertices to the graph
             for (int i = 0; i < 20; i++)
             {
-                var vertex = new Vertex(Random.Next(500), Random.Next(500), Random.Next(500));
+                var vertex = new Vertex((byte)Random.Next(50), (byte)Random.Next(50), (byte)Random.Next(50));
                 Graph.Vertices.Add(vertex);
             }
         }

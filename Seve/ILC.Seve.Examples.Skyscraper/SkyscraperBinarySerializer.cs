@@ -45,7 +45,7 @@ namespace ILC.Seve.Examples.Skyscraper
 
                 for (int i = 0; i < count; i++)
                 {
-                    var vertex = new Vertex(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
+                    var vertex = new Vertex(reader.ReadByte(), reader.ReadByte(), reader.ReadByte());
                     graph.Vertices.Add(vertex);
                 }
 

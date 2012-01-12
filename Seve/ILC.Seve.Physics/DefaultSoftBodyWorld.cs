@@ -100,13 +100,15 @@ namespace ILC.Seve.Physics
         {
             foreach (Vertex vertex in LastState.Vertices)
             {
-                foreach(Node node in Individual.Nodes)
+                foreach (Node node in Individual.Nodes)
                 {
                     if (vertex.Identifier.Equals(node.Tag))
                     {
-                        vertex.X = node.X.X;
-                        vertex.Y = node.X.Y;
-                        vertex.Z = node.X.Z;
+                        vertex.X = (byte) node.X.X;
+                        vertex.Y = (byte) node.X.Y;
+                        vertex.Z = (byte) node.X.Z;
+
+                        break;
                     }
                 }
             }
