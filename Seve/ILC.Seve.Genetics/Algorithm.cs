@@ -37,11 +37,11 @@ namespace ILC.Seve.Genetics
             var targetSize = Population.Count;
 
             // Sort the population by the calculated fitnesses
-            Population.OrderByDescending(individual => individual.Fitness);
-
             // Select and breed the top portion of the population
-            Population = Population.Take(Population.Count / 2).ToList();
-            Population = Population.OrderBy(a => Guid.NewGuid()).ToList();
+            Population = Population
+                .OrderByDescending(individual => individual.Fitness)
+                .Take(Population.Count / 2)
+                .OrderBy(a => Guid.NewGuid()).ToList();
 
             while(Population.Count < targetSize)
             {
@@ -55,10 +55,10 @@ namespace ILC.Seve.Genetics
             }
 
             // Randomly mutate some individuals
-            Population.Select(individual => {
+            Population = Population.Select(individual => {
                 // The MutatateFunction handles probability for us
                 return MutateFunction.Mutate(individual, Serializer);
-            });
+            }).ToList();
         }
     }
 }
