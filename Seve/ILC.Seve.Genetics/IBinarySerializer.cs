@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ILC.Seve.Genetics
+﻿namespace ILC.Seve.Genetics
 {
     /// <summary>
     /// Converts Individuals to and from binary data.  This is useful for
