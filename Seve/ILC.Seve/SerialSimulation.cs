@@ -8,14 +8,13 @@ using ILC.Seve.Physics;
 namespace ILC.Seve
 {
     /// <summary>
-    /// A simulation runner that tests individuals in parallel, utilizing
-    /// multiple CPU cores.
+    /// A simulation runner that tests individuals one by one.
     /// </summary>
-    public class ParallelSimulation : ISimulation
+    public class SerialSimulation : ISimulation
     {
         private Algorithm Algorithm;
 
-        public ParallelSimulation(Algorithm algorithm)
+        public SerialSimulation(Algorithm algorithm)
         {
             Algorithm = algorithm;
         }

@@ -75,7 +75,7 @@
     <Compile Include="ILC.Seve.Genetics\IBinarySerializer.cs" />
     <Compile Include="ILC.Seve.Genetics\ICrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\IMutateFunction.cs" />
-    <Compile Include="ILC.Seve\ParallelSimulation.cs" />
+    <Compile Include="ILC.Seve\SerialSimulation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ILC.Seve.Genetics\Individual.cs" />
     <Compile Include="ILC.Seve.Genetics\Algorithm.cs" />
