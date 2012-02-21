@@ -67,7 +67,7 @@ namespace ILC.Seve.Physics
             {
                 var vertex = graph.Vertices[i];
 
-                vertices[i] = new Vector3(vertex.X, vertex.Y, vertex.Z);
+                vertices[i] = new Vector3(vertex.ScaledX, vertex.ScaledY, vertex.ScaledZ);
             }
 
             Individual = SoftBodyHelpers.CreateFromConvexHull(WorldInfo, vertices);
@@ -80,10 +80,9 @@ namespace ILC.Seve.Physics
             {
                 foreach (Vertex vertex in graph.Vertices)
                 {
-                    // TODO: Floating point comparisons are failing here, but integers aren't accurate enough...
-                    if ((int)vertex.X == (int)node.X.X
-                        && (int)vertex.Y == (int)node.X.Y
-                        && (int)vertex.Z == (int)node.X.Z)
+                    if (vertex.ScaledX == node.X.X
+                        && vertex.ScaledY == node.X.Y
+                        && vertex.ScaledZ == node.X.Z)
                     {
                         node.Tag = vertex.Identifier;
                     }
@@ -104,9 +103,9 @@ namespace ILC.Seve.Physics
                 {
                     if (vertex.Identifier.Equals(node.Tag))
                     {
-                        vertex.X = (byte) node.X.X;
-                        vertex.Y = (byte) node.X.Y;
-                        vertex.Z = (byte) node.X.Z;
+                        vertex.X = (long)(node.X.X * vertex.ScaleFactor);
+                        vertex.Y = (long)(node.X.Y * vertex.ScaleFactor);
+                        vertex.Z = (long)(node.X.Z * vertex.ScaleFactor);
 
                         break;
                     }

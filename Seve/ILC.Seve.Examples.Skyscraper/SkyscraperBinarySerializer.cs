@@ -6,6 +6,15 @@ namespace ILC.Seve.Examples.Skyscraper
 {
     public class SkyscraperBinarySerializer : IBinarySerializer
     {
+        private readonly int VertexCount;
+        private readonly long Max;
+
+        public SkyscraperBinarySerializer(int vertexCount, long max)
+        {
+            this.VertexCount = vertexCount;
+            this.Max = max;
+        }
+
         public byte[] ToBinary(Individual _individual)
         {
             var individual = (SkyscraperIndividual)_individual;
@@ -41,11 +50,9 @@ namespace ILC.Seve.Examples.Skyscraper
             {
                 var reader = new BinaryReader(stream);
 
-                var count = reader.ReadInt32();
-
-                for (int i = 0; i < count; i++)
+                for (int i = 0; i < VertexCount; i++)
                 {
-                    var vertex = new Vertex(reader.ReadByte(), reader.ReadByte(), reader.ReadByte());
+                    var vertex = new Vertex(reader.ReadInt64(), reader.ReadInt64(), reader.ReadInt64(), Max);
                     graph.Vertices.Add(vertex);
                 }
 

@@ -25,19 +25,66 @@ namespace ILC.Seve.Graph
         /// A unique identifier used to link a Vertex to its associated
         /// BulletSharp node.
         /// </summary>
-        public Guid Identifier;
+        public readonly Guid Identifier;
 
-        public byte X { get; set; }
-        public byte Y { get; set; }
-        public byte Z { get; set; }
+        public readonly long Max;
+        public readonly long ScaleFactor;
 
-        public Vertex(byte X, byte Y, byte Z)
+        public long X;
+        public long Y;
+        public long Z;
+
+        public float ScaledX
         {
-            Identifier = Guid.NewGuid();
+            get
+            {
+                return X / ScaleFactor;
+            }
+        }
 
-            this.X = X;
-            this.Y = Y;
-            this.Z = Z;
+        public float ScaledY
+        {
+            get
+            {
+                return Y / ScaleFactor;
+            }
+        }
+
+        public float ScaledZ
+        {
+            get
+            {
+                return Z / ScaleFactor;
+            }
+        }
+
+        public Vertex(long x, long y, long z, long max)
+        {
+            this.Identifier = Guid.NewGuid();
+
+            this.Max = max;
+            this.ScaleFactor = GetScaleFactor(max);
+
+            this.X = x * ScaleFactor;
+            this.Y = y * ScaleFactor;
+            this.Z = z * ScaleFactor;
+        }
+
+        public static long GetScaleFactor(long max)
+        {
+            return long.MaxValue / max;
+        }
+
+        public long DistanceTo(Vertex other)
+        {
+            return (long) Math.Sqrt(Math.Pow(X - other.X, 2)
+                                  + Math.Pow(Y - other.Y, 2)
+                                  + Math.Pow(Z - other.Z, 2));
+        }
+
+        public Vertex Copy()
+        {
+            return new Vertex(X, Y, Z, Max);
         }
     }
 }
