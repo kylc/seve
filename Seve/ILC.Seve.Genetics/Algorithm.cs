@@ -43,7 +43,9 @@ namespace ILC.Seve.Genetics
                 .Take(Population.Count / 2)
                 .OrderBy(a => Guid.NewGuid()).ToList();
 
-            while(Population.Count < targetSize)
+            var newPopulation = new List<Individual>(Population.Count);
+
+            while(newPopulation.Count < targetSize)
             {
                 // TODO: Fix this.  Father could be the mother as well, also,
                 // it's broken.
@@ -51,11 +53,11 @@ namespace ILC.Seve.Genetics
                 var mother = Population[random.Next(Population.Count)];
 
                 var child = CrossFunction.Cross(father, mother, Serializer);
-                Population.Add(child);
+                newPopulation.Add(child);
             }
 
             // Randomly mutate some individuals
-            Population = Population.Select(individual => {
+            Population = newPopulation.Select(individual => {
                 // The MutatateFunction handles probability for us
                 return MutateFunction.Mutate(individual, Serializer);
             }).ToList();
