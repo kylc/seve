@@ -57,7 +57,7 @@ namespace ILC.Seve.Physics
 
         private void AddVertexGraph(VertexGraph graph)
         {
-            LastState = graph;
+            LastState = graph.Copy();
 
             var vertices = new Vector3[graph.Vertices.Count];
 

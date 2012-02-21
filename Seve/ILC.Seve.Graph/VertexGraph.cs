@@ -10,9 +10,23 @@ namespace ILC.Seve.Graph
     {
         public List<Vertex> Vertices { get; set; }
 
+        public readonly float ScaleFactor;
+
         public VertexGraph()
         {
             Vertices = new List<Vertex>();
+        }
+
+        public VertexGraph Copy()
+        {
+            VertexGraph graph = new VertexGraph();
+
+            foreach (var vertex in Vertices)
+            {
+                graph.Vertices.Add(vertex.Copy());
+            }
+
+            return graph;
         }
     }
 
