@@ -30,13 +30,12 @@ namespace ILC.Seve
 
                 foreach(var individual in population)
                 {
-                    Console.WriteLine("Testing individual {0}/{1} on thread {2}...",
-                        population.IndexOf(individual) + 1, population.Count,
-                        Thread.CurrentThread.ManagedThreadId);
-
                     var resultantGraph = RunPhysics(individual);
                     individual.Graph = resultantGraph;
 
+                    Console.WriteLine("Tested individual {0}/{1} = {2}",
+                        population.IndexOf(individual) + 1, population.Count,
+                        individual.Fitness);
                 }
 
                 Console.WriteLine("Average fitness of generation: {0}",
