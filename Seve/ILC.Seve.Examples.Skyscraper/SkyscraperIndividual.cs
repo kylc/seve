@@ -9,16 +9,6 @@ namespace ILC.Seve.Examples.Skyscraper
     {
         private static Random Random = new Random();
 
-        public SkyscraperIndividual(int vertexCount, long max) : base()
-        {
-            // Add a bunch of random vertices to the graph
-            for (int i = 0; i < vertexCount; i++)
-            {
-                var vertex = new Vertex(Random.Next(50), Random.Next(100), Random.Next(50), max);
-                Graph.Vertices.Add(vertex);
-            }
-        }
-
         public SkyscraperIndividual(VertexGraph graph)
         {
             Graph = graph;

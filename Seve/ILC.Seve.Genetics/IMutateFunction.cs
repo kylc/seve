@@ -6,6 +6,6 @@
     /// </summary>
     public interface IMutateFunction
     {
-        Individual Mutate(Individual individual, IBinarySerializer serializer);
+        Individual Mutate(Individual individual, BinarySerializer serializer);
     }
 }

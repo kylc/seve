@@ -15,9 +15,9 @@ namespace ILC.Seve.Genetics
         public List<Individual> Population;
         private ICrossFunction CrossFunction;
         private IMutateFunction MutateFunction;
-        private IBinarySerializer Serializer;
+        private BinarySerializer Serializer;
 
-        public Algorithm(List<Individual> initialPopulation, ICrossFunction crossFunction, IMutateFunction mutateFunction, IBinarySerializer serializer)
+        public Algorithm(List<Individual> initialPopulation, ICrossFunction crossFunction, IMutateFunction mutateFunction, BinarySerializer serializer)
         {
             Population = initialPopulation;
             CrossFunction = crossFunction;

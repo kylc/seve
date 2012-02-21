@@ -1,10 +1,11 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using ILC.Seve.Genetics;
 using ILC.Seve.Graph;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
-    public class SkyscraperBinarySerializer : IBinarySerializer
+    public class SkyscraperBinarySerializer : BinarySerializer
     {
         private readonly int VertexCount;
         private readonly long Max;
@@ -15,7 +16,7 @@ namespace ILC.Seve.Examples.Skyscraper
             this.Max = max;
         }
 
-        public byte[] ToBinary(Individual _individual)
+        public override byte[] ToBinary(Individual _individual)
         {
             var individual = (SkyscraperIndividual)_individual;
             var graph = individual.Graph;
@@ -41,10 +42,9 @@ namespace ILC.Seve.Examples.Skyscraper
             return stream.ToArray();
         }
 
-        public Individual FromBinary(byte[] data)
+        public override Individual FromBinary(Stream stream)
         {
             var graph = new VertexGraph();
-            var stream = new MemoryStream(data);
 
             using (stream)
             {
@@ -52,7 +52,7 @@ namespace ILC.Seve.Examples.Skyscraper
 
                 for (int i = 0; i < VertexCount; i++)
                 {
-                    var vertex = new Vertex(reader.ReadInt64(), reader.ReadInt64(), reader.ReadInt64(), Max);
+                    var vertex = new Vertex(ReadNormalLong(reader), ReadNormalLong(reader), ReadNormalLong(reader), Max);
                     graph.Vertices.Add(vertex);
                 }
 
@@ -60,6 +60,13 @@ namespace ILC.Seve.Examples.Skyscraper
 
                 return individual;
             }
+        }
+
+        private long ReadNormalLong(BinaryReader s)
+        {
+            var value = s.ReadInt64();
+
+            return Math.Abs(value);
         }
     }
 }

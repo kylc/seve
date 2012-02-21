@@ -5,6 +5,6 @@
     /// </summary>
     public interface ICrossFunction
     {
-        Individual Cross(Individual father, Individual mother, IBinarySerializer serializer);
+        Individual Cross(Individual father, Individual mother, BinarySerializer serializer);
     }
 }

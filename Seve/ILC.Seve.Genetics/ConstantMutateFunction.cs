@@ -18,7 +18,7 @@ namespace ILC.Seve.Genetics
             Random = new Random();
         }
 
-        public Individual Mutate(Individual individual, IBinarySerializer serializer)
+        public Individual Mutate(Individual individual, BinarySerializer serializer)
         {
             byte[] data = serializer.ToBinary(individual);
 

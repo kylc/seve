@@ -1,14 +1,21 @@
-﻿namespace ILC.Seve.Genetics
+﻿using System.IO;
+
+namespace ILC.Seve.Genetics
 {
     /// <summary>
     /// Converts Individuals to and from binary data.  This is useful for
     /// crossing and mutating as we only have to mix a simple data structure,
     /// rather than a complex one (a graph, for instance).
     /// </summary>
-    public interface IBinarySerializer
+    public abstract class BinarySerializer
     {
-        byte[] ToBinary(Individual individual);
+        public abstract byte[] ToBinary(Individual individual);
 
-        Individual FromBinary(byte[] data);
+        public abstract Individual FromBinary(Stream stream);
+
+        public Individual FromBinary(byte[] data)
+        {
+            return FromBinary(new MemoryStream(data));
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace ILC.Seve.Genetics
             Constant = constant;
         }
 
-        public Individual Cross(Individual father, Individual mother, IBinarySerializer serializer)
+        public Individual Cross(Individual father, Individual mother, BinarySerializer serializer)
         {
             byte[] fatherData = serializer.ToBinary(father);
             byte[] motherData = serializer.ToBinary(mother);

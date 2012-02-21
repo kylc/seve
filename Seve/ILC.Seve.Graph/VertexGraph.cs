@@ -10,8 +10,6 @@ namespace ILC.Seve.Graph
     {
         public List<Vertex> Vertices { get; set; }
 
-        public readonly float ScaleFactor;
-
         public VertexGraph()
         {
             Vertices = new List<Vertex>();

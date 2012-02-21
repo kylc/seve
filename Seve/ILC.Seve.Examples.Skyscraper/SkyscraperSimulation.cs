@@ -19,16 +19,22 @@ namespace ILC.Seve.Examples.Skyscraper
 
         static void Main(string[] args)
         {
+            var random = new Random();
+            var constructor = new SkyscraperBinarySerializer(VertexCount, Max);
+
             // Create the initial population
-            var individuals = new List<Individual>();
+            var individuals = new List<Individual>(PopulationSize);
             for (int i = 0; i < PopulationSize; i++)
             {
-                individuals.Add(new SkyscraperIndividual(VertexCount, Max));
+                // TODO: How about figuring out how much data we actually need?
+                var randomData = new byte[1024];
+                random.NextBytes(randomData);
+
+                individuals.Add(constructor.FromBinary(randomData));
             }
 
             var crossFunction = new ConstantCrossFunction(CrossConstant);
             var mutateFunction = new ConstantMutateFunction(MutatePercent);
-            var constructor = new SkyscraperBinarySerializer(VertexCount, Max);
 
             var algorithm = new Algorithm(individuals, crossFunction, mutateFunction, constructor);
             var simulation = new SerialSimulation(algorithm);
