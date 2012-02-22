@@ -77,9 +77,9 @@ namespace ILC.Seve.Graph
             this.Max = max;
             this.ScaleFactor = GetScaleFactor(max);
 
-            this.X = x * ScaleFactor;
-            this.Y = y * ScaleFactor;
-            this.Z = z * ScaleFactor;
+            this.X = x;
+            this.Y = y;
+            this.Z = z;
         }
 
         public static long GetScaleFactor(long max)
