@@ -10,7 +10,7 @@ namespace ILC.Seve.Examples.Skyscraper
         public const int RunForGenerations = 100;
 
         // TODO: Make this the right constant.
-        public const int CrossConstant = 50;
+        public const float CrossConstantRatio = 0.5F;
         public const int MutatePercent = 5;
 
         public const int VertexCount = 20;
@@ -29,7 +29,7 @@ namespace ILC.Seve.Examples.Skyscraper
                 individuals.Add(individual);
             }
 
-            var crossFunction = new ConstantCrossFunction(CrossConstant);
+            var crossFunction = new ConstantRatioCrossFunction(CrossConstantRatio);
             var mutateFunction = new ConstantMutateFunction(MutatePercent);
 
             var algorithm = new Algorithm(individuals, crossFunction, mutateFunction, constructor);

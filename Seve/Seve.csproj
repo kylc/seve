@@ -72,6 +72,7 @@
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperIndividual.cs" />
     <Compile Include="ILC.Seve.Genetics\ConstantCrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\ConstantMutateFunction.cs" />
+    <Compile Include="ILC.Seve.Genetics\ConstantRatioCrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\IBinarySerializer.cs" />
     <Compile Include="ILC.Seve.Genetics\ICrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\IMutateFunction.cs" />
