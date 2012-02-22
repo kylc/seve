@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ILC.Seve.Util;
 
 namespace ILC.Seve.Genetics
 {
@@ -12,17 +13,23 @@ namespace ILC.Seve.Genetics
     /// </summary>
     public class Algorithm
     {
+        private readonly int PopulationSize;
+
         public List<Individual> Population;
+        private BinarySerializer Constructor;
         private ICrossFunction CrossFunction;
         private IMutateFunction MutateFunction;
         private BinarySerializer Serializer;
 
-        public Algorithm(List<Individual> initialPopulation, ICrossFunction crossFunction, IMutateFunction mutateFunction, BinarySerializer serializer)
+        public Algorithm(int populationSize, BinarySerializer constructor, ICrossFunction crossFunction, IMutateFunction mutateFunction, BinarySerializer serializer)
         {
-            Population = initialPopulation;
+            PopulationSize = populationSize;
+            Constructor = constructor;
             CrossFunction = crossFunction;
             MutateFunction = mutateFunction;
             Serializer = serializer;
+
+            MakeInitialPopulation();
         }
 
         /// <summary>
@@ -61,6 +68,18 @@ namespace ILC.Seve.Genetics
                 // The MutatateFunction handles probability for us
                 return MutateFunction.Mutate(individual, Serializer);
             }).ToList();
+        }
+
+        private void MakeInitialPopulation()
+        {
+            var random = new RandomDataStream();
+
+            Population = new List<Individual>(PopulationSize);
+            for (int i = 0; i < PopulationSize; i++)
+            {
+                var individual = Constructor.FromBinary(random);
+                Population.Add(individual);
+            }
         }
     }
 }
