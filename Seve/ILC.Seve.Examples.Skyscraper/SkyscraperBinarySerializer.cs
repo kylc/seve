@@ -27,9 +27,6 @@ namespace ILC.Seve.Examples.Skyscraper
             {
                 var writer = new BinaryWriter(stream);
 
-                // Write the length of the graph (int)
-                writer.Write(graph.Vertices.Count);
-
                 // Write the locations of each point on the graph (3 floats)
                 foreach (var vertex in graph.Vertices)
                 {
