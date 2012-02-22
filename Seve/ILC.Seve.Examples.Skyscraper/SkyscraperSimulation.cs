@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using ILC.Seve.Genetics;
-using ILC.Seve.Graph;
-using System;
+using ILC.Seve.Util;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
@@ -19,18 +18,15 @@ namespace ILC.Seve.Examples.Skyscraper
 
         static void Main(string[] args)
         {
-            var random = new Random();
+            var random = new RandomDataStream();
             var constructor = new SkyscraperBinarySerializer(VertexCount, Max);
 
             // Create the initial population
             var individuals = new List<Individual>(PopulationSize);
             for (int i = 0; i < PopulationSize; i++)
             {
-                // TODO: How about figuring out how much data we actually need?
-                var randomData = new byte[1024];
-                random.NextBytes(randomData);
-
-                individuals.Add(constructor.FromBinary(randomData));
+                var individual = constructor.FromBinary(random);
+                individuals.Add(individual);
             }
 
             var crossFunction = new ConstantCrossFunction(CrossConstant);
