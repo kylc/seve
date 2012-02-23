@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using ILC.Seve.Genetics;
-using ILC.Seve.Util;
+﻿using ILC.Seve.Genetics;
 
 namespace ILC.Seve.Examples.Skyscraper
 {

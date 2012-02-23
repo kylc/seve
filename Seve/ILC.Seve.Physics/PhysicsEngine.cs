@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using BulletSharp;
-using BulletSharp.SoftBody;
-using ILC.Seve.Graph;
+﻿using ILC.Seve.Graph;
 
 namespace ILC.Seve.Physics
 {

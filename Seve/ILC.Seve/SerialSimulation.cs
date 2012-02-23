@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Threading;
 using ILC.Seve.Genetics;
 using ILC.Seve.Graph;
 using ILC.Seve.Physics;
