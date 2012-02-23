@@ -13,13 +13,7 @@ namespace ILC.Seve.Web
 
             foreach(var vertex in individual.Graph.Vertices)
             {
-                builder.Append("[");
-                builder.Append(vertex.ScaledX);
-                builder.Append(",");
-                builder.Append(vertex.ScaledY);
-                builder.Append(",");
-                builder.Append(vertex.ScaledZ);
-                builder.Append("],");
+                builder.AppendFormat("[{0},{1},{2}],", vertex.ScaledX, vertex.ScaledY, vertex.ScaledZ);
             }
 
             builder.Remove(builder.Length - 1, 1); // Remove the trailing comma
