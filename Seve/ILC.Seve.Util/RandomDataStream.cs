@@ -3,6 +3,10 @@ using System;
 
 namespace ILC.Seve.Util
 {
+    /// <summary>
+    /// A Stream implementation that simply produces a bunch of random bytes.
+    /// It can only be read from, not written to.
+    /// </summary>
     public class RandomDataStream : Stream
     {
         private readonly Random Random = new Random();
