@@ -76,6 +76,7 @@
     <Compile Include="ILC.Seve.Genetics\IBinarySerializer.cs" />
     <Compile Include="ILC.Seve.Genetics\ICrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\IMutateFunction.cs" />
+    <Compile Include="ILC.Seve.Physics\DefaultRigidBodyWorld.cs" />
     <Compile Include="ILC.Seve.Util\RandomDataStream.cs" />
     <Compile Include="ILC.Seve.Web\JSONWebSerializer.cs" />
     <Compile Include="ILC.Seve.Web\WebSerializer.cs" />
