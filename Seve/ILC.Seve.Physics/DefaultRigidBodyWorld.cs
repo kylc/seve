@@ -46,9 +46,7 @@ namespace ILC.Seve.Physics
 
         private void AddVertexGraph(VertexGraph graph)
         {
-            Individual = new List<VertexBoundRigidBody>();
-
-            foreach (var vertex in graph.Vertices)
+            Individual = graph.Vertices.Select(vertex =>
             {
                 var mass = 10000;
                 var motionState = new DefaultMotionState();
@@ -57,8 +55,8 @@ namespace ILC.Seve.Physics
                 var info = new RigidBodyConstructionInfo(mass, motionState, collisionShape);
                 var rigidBody = new VertexBoundRigidBody(vertex, info);
 
-                Individual.Add(rigidBody);
-            }
+                return rigidBody;
+            }).ToList();
 
             foreach (var body in Individual)
             {
