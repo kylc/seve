@@ -19,15 +19,13 @@ namespace ILC.Seve.Genetics
         private BinarySerializer Constructor;
         private ICrossFunction CrossFunction;
         private IMutateFunction MutateFunction;
-        private BinarySerializer Serializer;
 
-        public Algorithm(int populationSize, BinarySerializer constructor, ICrossFunction crossFunction, IMutateFunction mutateFunction, BinarySerializer serializer)
+        public Algorithm(int populationSize, BinarySerializer constructor, ICrossFunction crossFunction, IMutateFunction mutateFunction)
         {
             PopulationSize = populationSize;
             Constructor = constructor;
             CrossFunction = crossFunction;
             MutateFunction = mutateFunction;
-            Serializer = serializer;
 
             MakeInitialPopulation();
         }
