@@ -1,9 +1,9 @@
-﻿using ILC.Seve.Genetics;
+﻿using ILC.Seve.Graph;
 
 namespace ILC.Seve.Web
 {
     public interface WebSerializer
     {
-        string Serialize(Individual individual);
+        string Serialize(VertexGraph graph);
     }
 }

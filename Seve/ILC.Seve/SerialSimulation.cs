@@ -12,10 +12,12 @@ namespace ILC.Seve
     public class SerialSimulation : ISimulation
     {
         private Algorithm Algorithm;
+        private Action<VertexGraph> StateCallback;
 
-        public SerialSimulation(Algorithm algorithm)
+        public SerialSimulation(Algorithm algorithm, Action<VertexGraph> stateCallback)
         {
             Algorithm = algorithm;
+            StateCallback = stateCallback;
         }
 
         public void RunSimulation()
@@ -47,7 +49,7 @@ namespace ILC.Seve
         private VertexGraph RunPhysics(Individual individual)
         {
             var world = new DefaultRigidBodyWorld(individual.Graph);
-            var physics = new PhysicsEngine(world);
+            var physics = new PhysicsEngine(world, StateCallback);
 
             // Run for 30 seconds of simulated time
             // TODO: Increase this, it just makes it easier to test

@@ -1,4 +1,6 @@
 ﻿using ILC.Seve.Genetics;
+using ILC.Seve.Graph;
+using ILC.Seve.Web;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
@@ -16,13 +18,19 @@ namespace ILC.Seve.Examples.Skyscraper
 
         static void Main(string[] args)
         {
+            var clientBroadcaster = new ClientBroadcaster();
+            var webSerializer = new JSONWebSerializer();
+
             var constructor = new SkyscraperBinarySerializer(VertexCount, Max);
 
             var crossFunction = new ConstantRatioCrossFunction(CrossConstantRatio);
             var mutateFunction = new ConstantMutateFunction(MutatePercent);
 
             var algorithm = new Algorithm(PopulationSize, constructor, crossFunction, mutateFunction, constructor);
-            var simulation = new SerialSimulation(algorithm);
+            var simulation = new SerialSimulation(algorithm, (VertexGraph state) =>
+            {
+                var data = webSerializer.Serialize(state);
+            });
             simulation.RunSimulation();
         }
     }

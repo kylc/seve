@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using ILC.Seve.Genetics;
+using ILC.Seve.Graph;
 
 namespace ILC.Seve.Web
 {
@@ -16,13 +17,13 @@ namespace ILC.Seve.Web
     /// </example>
     public class JSONWebSerializer : WebSerializer
     {
-        public string Serialize(Individual individual)
+        public string Serialize(VertexGraph graph)
         {
             var builder = new StringBuilder();
 
             builder.Append("[");
 
-            foreach(var vertex in individual.Graph.Vertices)
+            foreach(var vertex in graph.Vertices)
             {
                 builder.AppendFormat("[{0},{1},{2}],", vertex.ScaledX, vertex.ScaledY, vertex.ScaledZ);
             }

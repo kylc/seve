@@ -1,4 +1,5 @@
-﻿using ILC.Seve.Graph;
+﻿using System;
+using ILC.Seve.Graph;
 
 namespace ILC.Seve.Physics
 {
@@ -9,10 +10,12 @@ namespace ILC.Seve.Physics
     public class PhysicsEngine
     {
         public PhysicsWorld PhysicalWorld { get; set; }
+        private Action<VertexGraph> StateCallback;
 
-        public PhysicsEngine(PhysicsWorld world)
+        public PhysicsEngine(PhysicsWorld world, Action<VertexGraph> stateCallback)
         {
             PhysicalWorld = world;
+            StateCallback = stateCallback;
         }
 
         /// <summary>
@@ -26,6 +29,7 @@ namespace ILC.Seve.Physics
             {
                 // Step at 60hz
                 PhysicalWorld.StepSimulation(60);
+                StateCallback(PhysicalWorld.GetState());
             }
 
             return PhysicalWorld.GetState();
