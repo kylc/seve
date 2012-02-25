@@ -27,7 +27,7 @@ namespace ILC.Seve.Examples.Skyscraper
             var mutateFunction = new ConstantMutateFunction(MutatePercent);
 
             var algorithm = new Algorithm(PopulationSize, constructor, crossFunction, mutateFunction);
-            var simulation = new SerialSimulation(algorithm, (VertexGraph state) =>
+            var simulation = new SerialSimulation(algorithm, state =>
             {
                 var data = webSerializer.Serialize(state);
                 clientBroadcaster.Broadcast(data);
