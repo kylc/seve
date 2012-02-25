@@ -113,28 +113,26 @@
                 renderer.render(scene, camera);
             }
 
-            // TODO: Get a real address here
-            var socket = new MozWebSocket('ws://localhost:8080');
+            var individuals = [];
+	// TODO: Get a real address here
+	var socket = new WebSocket('ws://localhost:8080');
+	socket.onmessage = function (stuff) {
+		for(var i=0; i<scene.objects.length; i++){
+			scene.removeObject(scene.objects[i]);
+		}
+		var data = JSON.parse(stuff.data);
+		individuals.push(data);
+		// If we haven't yet entered the point into the scene (we are just
+		// loading the page)
+			// Add all the incoming points to the scene as spheres
+			for(var i = 0; i < data.length; i++) {
+				var point = data[i];
+				var obj = makeSphere(point[0], point[1], point[2]);
 
-            socket.onmessage = function (stuff) {
-                var data = JSON.parse(stuff.data);
-
-                // If we haven't yet entered the point into the scene (we are just
-                // loading the page)
-                if(points.length == 0) {
-                    // Add all the incoming points to the scene as spheres
-                    for(var i = 0; i < data.length; i++) {
-                        var point = data[i];
-                        var obj = makeSphere(point[0], point[1], point[2]);
-
-                        objects.push(obj);
-                        scene.add(obj);
-                    }
-                }
-
+				scene.add(obj);
+			}
                 // Just update our local information about the points.  They will be
                 // redrawn when the browser requests a frame (see render()).
-                points = data;
             };
 
             function makeSphere(x, y, z) {
