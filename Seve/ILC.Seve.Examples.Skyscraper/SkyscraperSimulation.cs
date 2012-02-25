@@ -33,6 +33,7 @@ namespace ILC.Seve.Examples.Skyscraper
                 clientBroadcaster.Broadcast(data);
             });
 
+            clientBroadcaster.StartServer();
             simulation.RunSimulation();
         }
     }
