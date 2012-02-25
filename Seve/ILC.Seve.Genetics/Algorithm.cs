@@ -57,14 +57,14 @@ namespace ILC.Seve.Genetics
                 var father = Population[random.Next(Population.Count)];
                 var mother = Population[random.Next(Population.Count)];
 
-                var child = CrossFunction.Cross(father, mother, Serializer);
+                var child = CrossFunction.Cross(father, mother, Constructor);
                 newPopulation.Add(child);
             }
 
             // Randomly mutate some individuals
             Population = newPopulation.Select(individual => {
                 // The MutatateFunction handles probability for us
-                return MutateFunction.Mutate(individual, Serializer);
+                return MutateFunction.Mutate(individual, Constructor);
             }).ToList();
         }
 
