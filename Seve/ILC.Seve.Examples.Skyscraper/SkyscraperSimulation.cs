@@ -30,7 +30,9 @@ namespace ILC.Seve.Examples.Skyscraper
             var simulation = new SerialSimulation(algorithm, (VertexGraph state) =>
             {
                 var data = webSerializer.Serialize(state);
+                clientBroadcaster.Broadcast(data);
             });
+
             simulation.RunSimulation();
         }
     }

@@ -29,6 +29,7 @@ namespace ILC.Seve.Physics
             {
                 // Step at 60hz
                 PhysicalWorld.StepSimulation(60);
+
                 StateCallback(PhysicalWorld.GetState());
             }
 
