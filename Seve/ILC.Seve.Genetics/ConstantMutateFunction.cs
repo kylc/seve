@@ -25,7 +25,7 @@ namespace ILC.Seve.Genetics
             if (Random.Next(100) < MutationPercent)
             {
                 var mutateIndex = Random.Next(data.Length);
-
+                // Mutates a random index
                 data[mutateIndex] = (byte)Random.Next(256);
             }
 

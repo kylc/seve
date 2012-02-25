@@ -29,6 +29,7 @@ namespace ILC.Seve
             {
                 var population = Algorithm.Population;
 
+                // Tests each individual in the population through a physics simulation
                 foreach(var individual in population)
                 {
                     var resultantGraph = RunPhysics(individual);
@@ -42,7 +43,8 @@ namespace ILC.Seve
                 Console.WriteLine("Average fitness of generation: {0}",
                     population.Select(a => a.Fitness).Average());
 
-                Algorithm.Step();
+                Algorithm.Step(); // Steps through what it needs to for current generation
+                // to get to the next generation
             }
         }
 
@@ -55,7 +57,8 @@ namespace ILC.Seve
             // TODO: Increase this, it just makes it easier to test
             var graph = physics.RunSimulation(60);
 
-            // TODO: Do we still need this for rigid bodies?
+            // TODO: Do we still need this for rigid bodies? 
+            // - Dean: Don't think so, mem mngment doesn't seem to be an issue
             // world.DisposeIndividual();
 
             return graph;

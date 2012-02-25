@@ -84,6 +84,7 @@ namespace ILC.Seve.Graph
             return long.MaxValue / max;
         }
 
+        //Calculates the distance between two Vertices
         public long DistanceTo(Vertex other)
         {
             return (long) Math.Sqrt(Math.Pow(X - other.X, 2)
@@ -91,6 +92,7 @@ namespace ILC.Seve.Graph
                                   + Math.Pow(Z - other.Z, 2));
         }
 
+        //Returns a copy of this Vertex
         public Vertex Copy()
         {
             return new Vertex(X, Y, Z, Max);

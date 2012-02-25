@@ -26,8 +26,15 @@ namespace ILC.Seve.Web
         {
             foreach (var connection in Connections)
             {
-                connection.Send(data);//TODO: IOException because it couldn't write data to our JS file
-
+                connection.Send(data);//TODO: Fix IOException
+                /**IOException-
+                 * Unable to write data to the transport connection: 
+                 * An established connection was aborted by the software in your 
+                 * host machine.
+                 * 
+                 * Also:The simulation runs extremely fast when the web portion is not launched,
+                 * then slows down considerably and eventually crashes with an IO Exception.
+                 */
             }
         }
     }

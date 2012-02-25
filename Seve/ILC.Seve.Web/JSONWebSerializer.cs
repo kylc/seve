@@ -31,6 +31,7 @@ namespace ILC.Seve.Web
             builder.Remove(builder.Length - 1, 1); // Remove the trailing comma
             builder.Append("]");
 
+            //Returns a string of the graph that's been turned into a string of points
             return builder.ToString();
         }
     }

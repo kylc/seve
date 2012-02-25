@@ -53,10 +53,12 @@ namespace ILC.Seve.Genetics
             while(newPopulation.Count < targetSize)
             {
                 // TODO: Fix this. it's broken.
+                // This makes sure mother/father aren't same
                 int rand1 = random.Next(Population.Count);
                 var father = Population[rand1];
                 int rand2 = random.Next(Population.Count);
-                while (rand1 == rand2 && Population.Count>1) // Make sure that it doesn't go into an infinite loop
+                // Make sure that it doesn't go into an infinite loop
+                while (rand1 == rand2 && Population.Count>1) 
                 {
                     rand2 = random.Next(Population.Count);
                 }
@@ -73,6 +75,7 @@ namespace ILC.Seve.Genetics
             }).ToList();
         }
 
+        //Makes a population based on randomly generated points
         private void MakeInitialPopulation()
         {
             var random = new RandomDataStream();
