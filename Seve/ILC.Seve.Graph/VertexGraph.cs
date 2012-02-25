@@ -33,12 +33,6 @@ namespace ILC.Seve.Graph
     /// </summary>
     public class Vertex
     {
-        /// <summary>
-        /// A unique identifier used to link a Vertex to its associated
-        /// BulletSharp node.
-        /// </summary>
-        public readonly Guid Identifier;
-
         public readonly long Max;
         public readonly long ScaleFactor;
 
@@ -72,8 +66,6 @@ namespace ILC.Seve.Graph
 
         public Vertex(long x, long y, long z, long max)
         {
-            this.Identifier = Guid.NewGuid();
-
             this.Max = max;
             this.ScaleFactor = GetScaleFactor(max);
 

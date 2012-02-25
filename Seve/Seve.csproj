@@ -78,6 +78,7 @@
     <Compile Include="ILC.Seve.Genetics\IMutateFunction.cs" />
     <Compile Include="ILC.Seve.Physics\DefaultRigidBodyWorld.cs" />
     <Compile Include="ILC.Seve.Util\RandomDataStream.cs" />
+    <Compile Include="ILC.Seve.Util\VertexBoundRigidBody.cs" />
     <Compile Include="ILC.Seve.Web\JSONWebSerializer.cs" />
     <Compile Include="ILC.Seve.Web\WebSerializer.cs" />
     <Compile Include="ILC.Seve\SerialSimulation.cs" />
@@ -87,7 +88,6 @@
     <Compile Include="ILC.Seve.Graph\VertexGraph.cs" />
     <Compile Include="ILC.Seve.Physics\PhysicsEngine.cs" />
     <Compile Include="ILC.Seve.Physics\PhysicsHelpers.cs" />
-    <Compile Include="ILC.Seve.Physics\DefaultSoftBodyWorld.cs" />
     <Compile Include="ILC.Seve.Physics\PhysicsWorld.cs" />
     <Compile Include="ILC.Seve\ISimulation.cs" />
     <Compile Include="ILC.Seve.Web\ClientBroadcaster.cs" />

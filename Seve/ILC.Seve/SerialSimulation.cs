@@ -46,14 +46,15 @@ namespace ILC.Seve
 
         private VertexGraph RunPhysics(Individual individual)
         {
-            var world = new DefaultSoftBodyWorld(individual.Graph);
+            var world = new DefaultRigidBodyWorld(individual.Graph);
             var physics = new PhysicsEngine(world);
 
             // Run for 30 seconds of simulated time
             // TODO: Increase this, it just makes it easier to test
             var graph = physics.RunSimulation(60);
 
-            world.DisposeIndividual();
+            // TODO: Do we still need this for rigid bodies?
+            // world.DisposeIndividual();
 
             return graph;
         }
