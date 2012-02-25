@@ -80,12 +80,16 @@ namespace ILC.Seve.Physics
 
         public override void StepSimulation(int frequency)
         {
-            throw new NotImplementedException();
+            DynamicsWorld.StepSimulation(1.0F / frequency, 10);
         }
 
         public override VertexGraph GetState()
         {
-            throw new NotImplementedException();
+            var vertices = Individual.Select((body) => {
+                return body.Binding;
+            }).ToList();
+
+            return new VertexGraph(vertices);
         }
     }
 }

@@ -15,6 +15,11 @@ namespace ILC.Seve.Graph
             Vertices = new List<Vertex>();
         }
 
+        public VertexGraph(List<Vertex> vertices)
+        {
+            Vertices = vertices;
+        }
+
         public VertexGraph Copy()
         {
             VertexGraph graph = new VertexGraph();
