@@ -26,7 +26,8 @@ namespace ILC.Seve.Web
         {
             foreach (var connection in Connections)
             {
-                connection.Send(data);
+                connection.Send(data);//TODO: IOException because it couldn't write data to our JS file
+
             }
         }
     }

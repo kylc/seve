@@ -52,8 +52,7 @@ namespace ILC.Seve.Genetics
 
             while(newPopulation.Count < targetSize)
             {
-                // TODO: Fix this.  Father could be the mother as well, also,
-                // it's broken.
+                // TODO: Fix this. it's broken.
                 int rand1 = random.Next(Population.Count);
                 var father = Population[rand1];
                 int rand2 = random.Next(Population.Count);

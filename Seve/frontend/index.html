@@ -114,25 +114,26 @@
             }
 
             var individuals = [];
-	// TODO: Get a real address here
-	var socket = new WebSocket('ws://localhost:8080');
-	socket.onmessage = function (stuff) {
-		for(var i=0; i<scene.objects.length; i++){
-			scene.removeObject(scene.objects[i]);
-		}
-		var data = JSON.parse(stuff.data);
-		individuals.push(data);
-		// If we haven't yet entered the point into the scene (we are just
-		// loading the page)
-			// Add all the incoming points to the scene as spheres
-			for(var i = 0; i < data.length; i++) {
-				var point = data[i];
-				var obj = makeSphere(point[0], point[1], point[2]);
-
-				scene.add(obj);
-			}
-                // Just update our local information about the points.  They will be
-                // redrawn when the browser requests a frame (see render()).
+	        // TODO: Get a real address here
+	        var socket = new WebSocket('ws://localhost:8080');
+	        socket.onmessage = function (stuff) {
+		        for(var i=0; i<scene.objects.length; i++){ // This gets everything off of the screen
+			        scene.removeObject(scene.objects[i]);
+		        }
+		        var data = JSON.parse(stuff.data); // Now it stores all the data sent to js into the var data.
+		        individuals.push(data); // Adds data as an individual (similar to .add(data))
+		        // If we haven't yet entered the point into the scene (we are just
+		        // loading the page)
+			    // Add all the incoming points to the scene as spheres
+			    for(var i = 0; i < data.length; i++) {
+				    var point = data[i]; // Now it's taking each point and creating an object for it
+				    var obj = makeSphere(point[0], point[1], point[2]);
+				    //TODO:How will we show connections between data[i] and data[i+n]?
+                    //It seems like we're sending in the points only, but maybe we can send in what 
+                    // connections each point has and draw that as well.
+                    scene.add(obj); // Adds the sphere to the window.
+			        }
+                    //The points will be redrawn when the browser requests a frame (see render()).
             };
 
             function makeSphere(x, y, z) {
