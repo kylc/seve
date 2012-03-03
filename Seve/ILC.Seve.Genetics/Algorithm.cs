@@ -45,7 +45,6 @@ namespace ILC.Seve.Genetics
             var targetSize = Population.Count;
 
             // Sort the population by the calculated fitnesses
-            // Select and breed the top portion of the population
             Population = Population
                 .OrderByDescending(individual => individual.Fitness)
                 .Take(Population.Count / 2)
@@ -53,6 +52,7 @@ namespace ILC.Seve.Genetics
 
             var newPopulation = new List<Individual>(Population.Count);
 
+            // Select and breed the top portion of the population
             while(newPopulation.Count < targetSize)
             {
                 var father = Population[Random.Next(Population.Count)];
