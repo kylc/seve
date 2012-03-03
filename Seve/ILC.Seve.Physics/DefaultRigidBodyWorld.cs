@@ -73,6 +73,8 @@ namespace ILC.Seve.Physics
                     var constraint = new Generic6DofSpringConstraint(body, other, frameInA, frameInB, true);
 
                     // TODO: Now how do I apply this to the bodies?
+                    body.AddConstraintRef(constraint);
+                    other.AddConstraintRef(constraint);
                 }
             }
         }
