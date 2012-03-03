@@ -20,12 +20,16 @@ namespace ILC.Seve.Genetics
         private ICrossFunction CrossFunction;
         private IMutateFunction MutateFunction;
 
+        private static Random Random;
+
         public Algorithm(int populationSize, BinarySerializer constructor, ICrossFunction crossFunction, IMutateFunction mutateFunction)
         {
             PopulationSize = populationSize;
             Constructor = constructor;
             CrossFunction = crossFunction;
             MutateFunction = mutateFunction;
+
+            Random = new Random();
 
             MakeInitialPopulation();
         }
@@ -38,7 +42,6 @@ namespace ILC.Seve.Genetics
         {
             // Fitness is assigned in Simulation class
 
-            var random = new Random();
             var targetSize = Population.Count;
 
             // Sort the population by the calculated fitnesses
@@ -52,11 +55,11 @@ namespace ILC.Seve.Genetics
 
             while(newPopulation.Count < targetSize)
             {
-                var father = Population[random.Next(Population.Count)];
+                var father = Population[Random.Next(Population.Count)];
                 var mother = (Individual) null;
                 do
                 {
-                    mother = Population[random.Next(Population.Count)];
+                    mother = Population[Random.Next(Population.Count)];
                 } while (father == mother || mother == null);
 
                 var child = CrossFunction.Cross(father, mother, Constructor);
