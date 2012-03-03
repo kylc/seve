@@ -52,17 +52,12 @@ namespace ILC.Seve.Genetics
 
             while(newPopulation.Count < targetSize)
             {
-                // TODO: Fix this. it's broken.
-                // This makes sure mother/father aren't same
-                int rand1 = random.Next(Population.Count);
-                var father = Population[rand1];
-                int rand2 = random.Next(Population.Count);
-                // Make sure that it doesn't go into an infinite loop
-                while (rand1 == rand2 && Population.Count>1) 
+                var father = Population[random.Next(Population.Count)];
+                var mother = (Individual) null;
+                do
                 {
-                    rand2 = random.Next(Population.Count);
-                }
-                var mother = Population[rand2];
+                    mother = Population[random.Next(Population.Count)];
+                } while (father == mother || mother == null);
 
                 var child = CrossFunction.Cross(father, mother, Constructor);
                 newPopulation.Add(child);
