@@ -32,10 +32,9 @@ namespace ILC.Seve.Physics
             Solver = new SequentialImpulseConstraintSolver();
 
             DynamicsWorld = new DiscreteDynamicsWorld(Dispatcher, Broadphase, Solver, CollisionConfiguration);
-            // Bullet uses a right-handed coordinate system, so Y is up, X is "right", and z is "left"
-            DynamicsWorld.Gravity = new Vector3(0F, -9.81F, 0F); // Y is the traditional Z axis
+            DynamicsWorld.Gravity = new Vector3(0F, 0F, -9.81F);
 
-            Ground = PhysicsHelpers.MakePlane(new Vector3(0, 1, 0), 0);
+            Ground = PhysicsHelpers.MakePlane(new Vector3(0, 0, 1), 0);
             DynamicsWorld.AddRigidBody(Ground);
         }
         

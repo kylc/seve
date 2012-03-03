@@ -16,7 +16,7 @@ namespace ILC.Seve.Examples.Skyscraper
 
         public override int CalculateFitness()
         {
-            return (int) Graph.Vertices.OrderByDescending(a => a.Y).First().ScaledY;
+            return (int) Graph.Vertices.OrderByDescending(a => a.Z).First().ScaledY;
         }
     }
 }
