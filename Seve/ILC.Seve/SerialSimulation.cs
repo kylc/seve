@@ -33,7 +33,7 @@ namespace ILC.Seve
                 foreach(var individual in population)
                 {
                     var resultantGraph = RunPhysics(individual);
-                    individual.Graph = resultantGraph;
+                    individual.SimulatedGraph = resultantGraph;
 
                     Console.WriteLine("Tested individual {0}/{1} = {2}",
                         population.IndexOf(individual) + 1, population.Count,

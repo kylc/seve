@@ -11,6 +11,7 @@ namespace ILC.Seve.Genetics
     public abstract class Individual : IComparable
     {
         public VertexGraph Graph { get; set; }
+        public VertexGraph SimulatedGraph { get; set; }
 
         /// <summary>
         /// A cached fitness value.
