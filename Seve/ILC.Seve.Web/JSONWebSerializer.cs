@@ -1,6 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 using ILC.Seve.Genetics;
-using ILC.Seve.Graph;
 
 namespace ILC.Seve.Web
 {
@@ -17,22 +17,21 @@ namespace ILC.Seve.Web
     /// </example>
     public class JSONWebSerializer : WebSerializer
     {
-        public string Serialize(VertexGraph graph)
+        private List<double> Averages = new List<double>();
+
+        public string Rewind()
         {
-            var builder = new StringBuilder();
+            var averages = string.Join(",", Averages);
 
-            builder.Append("[");
+            return string.Format("{{ \"average_fitnesses\": [{0}] }}", averages);
+        }
 
-            foreach(var vertex in graph.Vertices)
-            {
-                builder.AppendFormat("[{0},{1},{2}],", vertex.ScaledX, vertex.ScaledY, vertex.ScaledZ);
-            }
+        public string Serialize(List<Individual> state)
+        {
+            var average = state.Select(a => a.Fitness).Average();
+            Averages.Add(average);
 
-            builder.Remove(builder.Length - 1, 1); // Remove the trailing comma
-            builder.Append("]");
-
-            //Returns a string of the graph that's been turned into a string of points
-            return builder.ToString();
+            return string.Format("{{ \"average_fitness\": {0} }}", average);
         }
     }
 }

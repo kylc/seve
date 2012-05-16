@@ -5,11 +5,13 @@ namespace ILC.Seve.Web
 {
     public class ClientBroadcaster
     {
-        public List<IWebSocketConnection> Connections { get; private set;  }
+        private List<IWebSocketConnection> Connections;
+        private WebSerializer Serializer;
 
-        public ClientBroadcaster()
+        public ClientBroadcaster(WebSerializer serializer)
         {
             Connections = new List<IWebSocketConnection>();
+            Serializer = serializer;
         }
 
         public void StartServer()
@@ -17,8 +19,9 @@ namespace ILC.Seve.Web
             var server = new WebSocketServer("ws://localhost:8080");
             server.Start(socket =>
             {
-                socket.OnOpen = () => Connections.Add(socket);
+                socket.OnOpen = () => { Connections.Add(socket); socket.Send(Serializer.Rewind()); };
                 socket.OnClose = () => Connections.Remove(socket);
+                socket.OnMessage = (string m) => OnMessage(socket, m);
             });
         }
 
@@ -26,16 +29,13 @@ namespace ILC.Seve.Web
         {
             foreach (var connection in Connections)
             {
-                connection.Send(data);//TODO: Fix IOException
-                /**IOException-
-                 * Unable to write data to the transport connection: 
-                 * An established connection was aborted by the software in your 
-                 * host machine.
-                 * 
-                 * Also:The simulation runs extremely fast when the web portion is not launched,
-                 * then slows down considerably and eventually crashes with an IO Exception.
-                 */
+                connection.Send(data);
             }
+        }
+
+        private void OnMessage(IWebSocketConnection socket, string message)
+        {
+            
         }
     }
 }

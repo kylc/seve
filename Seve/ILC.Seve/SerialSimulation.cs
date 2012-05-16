@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using ILC.Seve.Genetics;
 using ILC.Seve.Graph;
@@ -12,9 +13,9 @@ namespace ILC.Seve
     public class SerialSimulation : ISimulation
     {
         private Algorithm Algorithm;
-        private Action<VertexGraph> StateCallback;
+        private Action<List<Individual>> StateCallback;
 
-        public SerialSimulation(Algorithm algorithm, Action<VertexGraph> stateCallback)
+        public SerialSimulation(Algorithm algorithm, Action<List<Individual>> stateCallback)
         {
             Algorithm = algorithm;
             StateCallback = stateCallback;
@@ -40,6 +41,8 @@ namespace ILC.Seve
                         individual.Fitness);
                 }
 
+                StateCallback(Algorithm.Population);
+
                 Console.WriteLine("Average fitness of generation: {0}",
                     population.Select(a => a.Fitness).Average());
 
@@ -51,7 +54,7 @@ namespace ILC.Seve
         private VertexGraph RunPhysics(Individual individual)
         {
             var world = new DefaultRigidBodyWorld(individual.Graph);
-            var physics = new PhysicsEngine(world, StateCallback);
+            var physics = new PhysicsEngine(world);
 
             // Run for 30 seconds of simulated time
             // TODO: Increase this, it just makes it easier to test

@@ -10,12 +10,10 @@ namespace ILC.Seve.Physics
     public class PhysicsEngine
     {
         public PhysicsWorld PhysicalWorld { get; set; }
-        private Action<VertexGraph> StateCallback;
 
-        public PhysicsEngine(PhysicsWorld world, Action<VertexGraph> stateCallback)
+        public PhysicsEngine(PhysicsWorld world)
         {
             PhysicalWorld = world;
-            StateCallback = stateCallback;
         }
 
         /// <summary>
@@ -29,8 +27,6 @@ namespace ILC.Seve.Physics
             {
                 // Step at 60hz
                 PhysicalWorld.StepSimulation(60);
-
-                StateCallback(PhysicalWorld.GetState());
             }
 
             return PhysicalWorld.GetState();

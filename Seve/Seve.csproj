@@ -70,7 +70,7 @@
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperBinarySerializer.cs" />
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperSimulation.cs" />
     <Compile Include="ILC.Seve.Examples.Skyscraper\SkyscraperIndividual.cs" />
-    <Compile Include="ILC.Seve.Genetics\ConstantCrossFunction.cs" />
+    <Compile Include="ILC.Seve.Genetics\RandomCrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\ConstantMutateFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\ConstantRatioCrossFunction.cs" />
     <Compile Include="ILC.Seve.Genetics\IBinarySerializer.cs" />

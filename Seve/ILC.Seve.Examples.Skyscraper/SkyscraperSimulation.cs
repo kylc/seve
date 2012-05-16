@@ -1,12 +1,11 @@
 ﻿using ILC.Seve.Genetics;
-using ILC.Seve.Graph;
 using ILC.Seve.Web;
 
 namespace ILC.Seve.Examples.Skyscraper
 {
     public class SkyscraperSimulation
     {
-        public const int PopulationSize = 20;
+        public const int PopulationSize = 100;
         public const int RunForGenerations = 100;
 
         public const float CrossConstantRatio = 0.5F;
@@ -17,12 +16,12 @@ namespace ILC.Seve.Examples.Skyscraper
 
         static void Main(string[] args)
         {
-            var clientBroadcaster = new ClientBroadcaster();
             var webSerializer = new JSONWebSerializer();
+            var clientBroadcaster = new ClientBroadcaster(webSerializer);
 
             var constructor = new SkyscraperBinarySerializer(VertexCount, Max);
 
-            var crossFunction = new ConstantRatioCrossFunction(CrossConstantRatio);
+            var crossFunction = new RandomCrossFunction();
             var mutateFunction = new ConstantMutateFunction(MutatePercent);
 
             var algorithm = new Algorithm(PopulationSize, constructor, crossFunction, mutateFunction);

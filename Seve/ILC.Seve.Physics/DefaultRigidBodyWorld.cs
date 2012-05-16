@@ -17,7 +17,6 @@ namespace ILC.Seve.Physics
         private static RigidBody Ground;
 
         private List<VertexBoundRigidBody> Individual;
-        private VertexGraph LastState;
 
         static DefaultRigidBodyWorld()
         {
@@ -66,8 +65,8 @@ namespace ILC.Seve.Physics
                 foreach (var other in nearest)
                 {
                     // TODO: What are these matrices supposed to be?
-                    var frameInA = Matrix.Identity;
-                    var frameInB = Matrix.Identity;
+                    var frameInA = body.MotionState.WorldTransform;
+                    var frameInB = other.MotionState.WorldTransform;
 
                     // TODO: How do you specify the spring's springiness?
                     var constraint = new Generic6DofSpringConstraint(body, other, frameInA, frameInB, true);
@@ -86,9 +85,7 @@ namespace ILC.Seve.Physics
 
         public override VertexGraph GetState()
         {
-            var vertices = Individual.Select((body) => {
-                return body.Binding;
-            }).ToList();
+            var vertices = Individual.Select(body => body.Binding).ToList();
 
             return new VertexGraph(vertices);
         }

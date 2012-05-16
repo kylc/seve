@@ -1,9 +1,12 @@
-﻿using ILC.Seve.Graph;
+﻿using System;
+using System.Collections.Generic;
+using ILC.Seve.Genetics;
 
 namespace ILC.Seve.Web
 {
     public interface WebSerializer
     {
-        string Serialize(VertexGraph graph);
+        string Rewind();
+        string Serialize(List<Individual> state);
     }
 }

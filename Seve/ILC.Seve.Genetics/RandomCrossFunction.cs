@@ -8,14 +8,9 @@ namespace ILC.Seve.Genetics
     /// the first individual and the rest of the data from the second
     /// individual.
     /// </summary>
-    class ConstantCrossFunction : ICrossFunction
+    class RandomCrossFunction : ICrossFunction
     {
-        public readonly int Constant;
-
-        public ConstantCrossFunction(int constant)
-        {
-            Constant = constant;
-        }
+        private readonly Random Random = new Random();
 
         public Individual Cross(Individual father, Individual mother, BinarySerializer serializer)
         {
@@ -29,8 +24,10 @@ namespace ILC.Seve.Genetics
 
             byte[] childData = new byte[fatherData.Length];
 
-            Array.Copy(fatherData, childData, Constant);
-            Array.Copy(motherData, Constant, childData, Constant, childData.Length - Constant);
+            var index = Random.Next(fatherData.Length);
+
+            Array.Copy(fatherData, childData, index);
+            Array.Copy(motherData, index, childData, index, childData.Length - index);
 
             return serializer.FromBinary(childData);
         }
