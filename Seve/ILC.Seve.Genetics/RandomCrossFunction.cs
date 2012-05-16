@@ -3,10 +3,7 @@
 namespace ILC.Seve.Genetics
 {
     /// <summary>
-    /// A cross function that splits each individual at a constant index.  For
-    /// example, if the constant was 50, it would take the first 50 bytes of
-    /// the first individual and the rest of the data from the second
-    /// individual.
+    /// A cross function that splits each individual at a random index.
     /// </summary>
     class RandomCrossFunction : ICrossFunction
     {
