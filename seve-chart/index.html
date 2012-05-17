@@ -1,0 +1,133 @@
+<html>
+    <head>
+        <title>Seve Timeline</title>
+        <link rel="stylesheet" href="css/graph.css" />
+        <link rel="stylesheet" href="css/legend.css" />
+        <link rel="stylesheet" href="css/detail.css" />
+        <link rel="stylesheet" href="css/flick/jquery-ui-1.8.20.custom.css" />
+        <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
+        <script type="text/javascript" src="js/d3.v2.js"></script>
+        <script type="text/javascript" src="js/rickshaw.min.js"></script>
+
+        <style type="text/css">
+            * 
+            {
+                padding: 0;
+                margin: 0;
+            }
+            
+            html, body
+            {
+                overflow: hidden;
+            }
+            
+            h1 
+            {
+                font-family: Arial;
+                text-align: center;
+                font-size: 50px;
+                padding-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Fitness Timeline</h1>
+        <div id="chart" style="width: 100%; height: 100%"></div>
+        <div id="dialog">
+            Processing Time: <span id="processing_time"></span>ms
+        </div>
+
+        <script type="text/javascript" >
+            // The current generation, the x-axis
+            var generation = 0;
+
+            var all_data = [];
+
+            // Add a single placeholder point, or Rickshaw chokes on an empty dataset
+            var data = [{ x: 0, y: 0 }];
+            var initialized = false;
+
+            var graph = new Rickshaw.Graph({
+                element: document.querySelector("#chart"),
+                renderer: 'line',
+                dataURL: 'localhost:',
+                min: 0,
+                max: 4000,
+                series: [{
+                    color: 'steelblue',
+                    data: data,
+                    name: 'Fitness'
+                }]
+            });
+
+            graph.renderer.setStrokeWidth(10);
+
+            var hovering = false;
+            var currentX = 0;
+
+            var hoverDetail = new Rickshaw.Graph.HoverDetail({
+                graph: graph,
+                xFormatter: function (x) { currentX = x; return "Generation: " + x; },
+                yFormatter: function (y) { return y; },
+                formatter: function (series, x, y, formattedX, formattedY) {
+                    return "Generation: " + x + "<br>" + "Fitness: " + y;
+                },
+                onShow: function () {
+                    hovering = true;
+                },
+                onHide: function () {
+                    hovering = false;
+                }
+            });
+
+            document.body.addEventListener('click', function () {
+                if (hovering) {
+                    var dialog = $('#dialog');
+                    console.log(all_data);
+                    $('#dialog #processing_time').html(all_data[currentX]['processing_time']);
+                    dialog.dialog({
+                        title: 'Generation ' + currentX
+                    });
+                }
+            });
+
+            // var axes = new Rickshaw.Graph.Axis.Time({ graph: graph });
+
+            var socket = new WebSocket('ws://localhost:8080');
+            socket.onmessage = function (stuff) {
+                var json = JSON.parse(stuff.data);
+
+                // Remove the placeholder (0, 0) data point
+                if (!initialized) {
+                    data.pop();
+                    initialized = true;
+                }
+
+                if (json['average_fitness']) {
+
+                    all_data[generation] = json;
+                    data.push({ x: generation, y: json['average_fitness'] });
+                    graph.update();
+
+                    generation++;
+                } else if (json['average_fitnesses']) {
+                    for (var x in json['average_fitnesses']) {
+                        var avg = json['average_fitnesses'][x];
+
+                        data.push({ x: generation++, y: avg });
+                    }
+                    graph.update();
+                } else if (json['processing_times']) {
+                    for (var x in json['processing_times']) {
+                        var time = json['processing_times'][x];
+
+                        data.push({ x: generation++, y: avg });
+                    }
+                    graph.update();
+                }
+            };
+
+        </script>
+    </body>
+</html>

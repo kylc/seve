@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ILC.Seve.Genetics;
 
 namespace ILC.Seve.Web
 {
@@ -17,21 +16,23 @@ namespace ILC.Seve.Web
     /// </example>
     public class JSONWebSerializer : WebSerializer
     {
-        private List<double> Averages = new List<double>();
+        private List<SimulationState> States = new List<SimulationState>();
 
         public string Rewind()
         {
-            var averages = string.Join(",", Averages);
+            var averages = string.Join(",", States.Select(s => s.Individuals.Average(x => x.Fitness)));
+            var times = string.Join(",", States.Select(s => s.ProcessingTime));
 
-            return string.Format("{{ \"average_fitnesses\": [{0}] }}", averages);
+            return string.Format("{{ \"average_fitnesses\": [{0}], processing_times: [{1}] }}", averages, times);
         }
 
-        public string Serialize(List<Individual> state)
+        public string Serialize(SimulationState state)
         {
-            var average = state.Select(a => a.Fitness).Average();
-            Averages.Add(average);
+            States.Add(state);
 
-            return string.Format("{{ \"average_fitness\": {0} }}", average);
+            var average = state.Individuals.Select(a => a.Fitness).Average();
+
+            return string.Format("{{ \"average_fitness\": {0}, \"processing_time\": {1} }}", average, state.ProcessingTime);
         }
     }
 }

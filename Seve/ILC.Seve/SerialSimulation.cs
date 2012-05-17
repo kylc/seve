@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using ILC.Seve.Genetics;
 using ILC.Seve.Graph;
@@ -13,9 +14,9 @@ namespace ILC.Seve
     public class SerialSimulation : ISimulation
     {
         private Algorithm Algorithm;
-        private Action<List<Individual>> StateCallback;
+        private Action<SimulationState> StateCallback;
 
-        public SerialSimulation(Algorithm algorithm, Action<List<Individual>> stateCallback)
+        public SerialSimulation(Algorithm algorithm, Action<SimulationState> stateCallback)
         {
             Algorithm = algorithm;
             StateCallback = stateCallback;
@@ -30,6 +31,9 @@ namespace ILC.Seve
             {
                 var population = Algorithm.Population;
 
+                var stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 // Tests each individual in the population through a physics simulation
                 foreach(var individual in population)
                 {
@@ -41,7 +45,11 @@ namespace ILC.Seve
                         individual.Fitness);
                 }
 
-                StateCallback(Algorithm.Population);
+                stopwatch.Stop();
+
+
+                var state = new SimulationState(population, stopwatch.ElapsedMilliseconds);
+                StateCallback(state);
 
                 Console.WriteLine("Average fitness of generation: {0}",
                     population.Select(a => a.Fitness).Average());

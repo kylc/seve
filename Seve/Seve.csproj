@@ -82,6 +82,7 @@
     <Compile Include="ILC.Seve.Web\JSONWebSerializer.cs" />
     <Compile Include="ILC.Seve.Web\WebSerializer.cs" />
     <Compile Include="ILC.Seve\SerialSimulation.cs" />
+    <Compile Include="ILC.Seve\SimulationState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ILC.Seve.Genetics\Individual.cs" />
     <Compile Include="ILC.Seve.Genetics\Algorithm.cs" />
